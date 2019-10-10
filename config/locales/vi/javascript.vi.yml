@@ -1,0 +1,13 @@
+vi:
+  javascript:
+    are_you_sure: "Bạn có chắc không?"
+    are_you_sure_confirm: "Xác nhận. Bạn có chắc không?"
+    are_you_sure_cancel: "Hủy bỏ. Bạn có chắc không?"
+    are_you_sure_confirm_order: "Nhận đơn đặt hàng. Bạn có chắc không?"
+    are_you_sure_cancel_order: "Hủy đơn hàng. Bạn có chắc không?"
+    change_avatar: "Hình đại diện sẽ được thay đổi!"
+    success:
+      change_avatar: "Cập nhật hình đại diện thành công"
+    error:
+      change_avatar: "Cập nhật hình đại diện thất bại"
+    place_offline: "Địa điểm đã đóng, đơn hàng sẽ được xác nhận khi mở. Vẫn tiếp tục?"

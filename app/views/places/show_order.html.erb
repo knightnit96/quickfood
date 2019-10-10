@@ -1,0 +1,288 @@
+<% provide :title, @place.name %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+      <div id="thumb"><img src="/assets/img/quants.jpg" alt=""></div>
+      <% overall @place %>
+			<div data="<%= @overall %>" class="rateyo-readonly" style="margin: auto;"></div>
+			(<small id="overall_review_a"><%= t ".reviews", count: @place.rates.count(:rating) %></small>)
+      <h1><%= @place.name %></h1>
+      <div><em><%= by_category_name @place.category_id %> / <%= by_province_name @place.province_id %></em></div>
+
+      <div><i class="icon_pin"></i> <%= @place.address %> - <strong><%= t ".delivery_charge" %></strong><%= t ".detail_delivery_charge" %></div>
+    </div>
+    <!-- End sub_content -->
+  </div>
+  <!-- End subheader -->
+</section>
+<!-- End section -->
+<!-- End SubHeader ============================================ -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+      <li><%= link_to "Danh sách địa điểm", list_path(province: to_slug_province(@province.name)) %></li>
+      <li><%= link_to @place.name, place_path(id: @place.id) %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<div class="collapse" id="collapseMap">
+	<div id="map" class="map" data-longitude=<%= @place.longitude %> data-latitude=<%= @place.latitude %>></div>
+</div><!-- End Map -->
+<div class="container margin_60_35">
+  <div class="row">
+    <div class="col-md-3">
+      <p>
+				<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap"><%= t ".view_on_map" %></a>
+			</p>
+      <div class="box_style_2 hidden-xs info">
+        <h4 class="nomargin_top">Thời gian giao hàng <i class="icon_clock_alt pull-right"></i></h4>
+        <p>
+          Trung bình khoảng 20 phút sau khi đặt hàng, bạn sẽ nhận được hàng
+        </p>
+        <hr>
+        <h4>Thanh toán an toàn <i class="icon_creditcard pull-right"></i></h4>
+        <p>
+          Thanh toán an toàn bằng tiền mặt hoặc thẻ ngân hàng
+        </p>
+      </div>
+      <!-- End box_style_2 -->
+      <div class="box_style_2 hidden-xs" >
+        <% if user_signed_in? %>
+          <% if Rate.find_by(place_id: @place.id, user_id: current_user.id).blank? %>
+            <button data-toggle="modal" data-target="#modal_add_review" class="btn_full" id="btn_review_now"><%= t ".review_now" %></button>
+          <% end %>
+        <% else %>
+          <p>Vui lòng đăng nhập để  đánh giá</p>
+        <% end %>
+        <hr>
+        <div class="review_list">
+          <% if @reviews.any? %>
+            <% i = 0 %>
+            <% @reviews.each do |review| %>
+              <div class="review_strip_single review_item" <% if i >= 5 %>style="display:none"<% end %>>
+                <img src="<%= review.user.avatar.url %>" alt="" class="img-circle" width="50px">
+                <h4><%= review.user.name %>
+                <% if user_signed_in? %>
+                  <% if review.user.id == current_user.id %>
+                    <%= link_to "javascript:void(0)", class: "delete_review_btn", data_id: review.id, pid: @place.id do %>
+                      <i class="icon-trash"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                </h4>
+                <div class="rating">
+                  <% review.rating.times.each do %>
+                    <i class="icon_star voted"></i>
+                  <% end %>
+                  <small><%= l review.updated_at, format: :short %></small>
+                </div>
+                <p class="nomargin"><%= review.content %></p>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+        </div>
+        <div id="has_review">
+          <% if @reviews.any? %>
+            <div id="loadMore">
+              <a href="#"><%= t ".load_more" %></a>
+            </div>
+          <% else %>
+            <div id="not_have_review">
+              <%= t ".not_have_review"%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- End col-md-3 -->
+    <div class="col-md-6">
+      <div class="panel-group" id="order_payment">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#order_payment" href="#payment_method"><%= t ".payment_method" %><i class="indicator icon_minus_alt2 pull-right"></i></a>
+            </h4>
+          </div>
+          <div id="payment_method" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="payment_select">
+                <label><input type="radio" value="0" checked name="payment_method" class="icheck">Thanh toán bằng tiền mặt</label>
+                <i class="icon_wallet"></i>
+              </div>
+              <div class="payment_select">
+                <label><input type="radio" value="1" name="payment_method" class="icheck">Thanh toán bằng thẻ tín dụng</label>
+                <i class="icon_creditcard"></i>
+              </div>
+              <div class="payment_select nomargin" id="paypal">
+                <label><input type="radio" value="2" name="payment_method" class="icheck">Thanh toán bằng Paypal</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#order_payment" href="#address"><%= t ".address" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+            </h4>
+          </div>
+          <div id="address" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="form-group">
+								<select class="form-control" name="order_address" id="order_address" data-latitude="<%= @place.latitude %>" data-longitude="<%= @place.longitude %>">
+                  <% @addresses.each do |address| %>
+                    <option value="<%= address.id %>" <% if cookies[:address] == address.id.to_s %>selected<% end %> data-latitude="<%= address.latitude %>" data-longitude="<%= address.longitude %>"><%= address.address %> - <%= address.name %> - <%= address.phone %></option>
+                  <% end %>
+								</select>
+							</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_style_2">
+        <h2 class="inner">Phân mục</h2>
+        <% @classify_no_icon_parent.each do |no_icon| %>
+          <h4><strong><%= no_icon.name %>:</strong>
+            <% check = true %>
+            <% @classifies.each do |classify| %>
+              <% if classify.classify_category_parent_id == no_icon.id %>
+                <%= classify.classify_category_name if check == true %>
+                <%= ", "+classify.classify_category_name if check == false %>
+                <% check = false %>
+              <% end %>
+            <% end %>
+          </h4>
+        <% end %>
+        <% @classify_icon_parent.each do |icon| %>
+          <h4><strong><%= icon.name %>:</strong></h4>
+          <div class="row">
+            <% @classifies.each do |classify| %>
+              <% if classify.classify_category_parent_id == icon.id %>
+                <div class="col-md-6">
+                  <h5>
+                    <i class="<%= classify.classify_category_icon %>"></i>
+                    <%= classify.classify_category_name %>
+                  </h5>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <!-- End col-md-6 -->
+    <div class="col-md-3" id="sidebar">
+      <div class="theiaStickySidebar">
+        <div id="cart_box">
+          <h3>Đơn hàng của bạn <i class="icon_cart_alt pull-right"></i></h3>
+          <table class="table table_summary">
+            <tbody>
+              <% @foods.each do |key, value| %>
+								<% @food_item = Food.find_by id: key.split(",")[0] %>
+								<% price_food = @food_item.price %>
+								<% price_food = @food_item.discount if @food_item.discount.present? %>
+								<tr>
+									<td>
+                    <strong><%= value %> x</strong> <%= @food_item.name %>
+									</td>
+									<td>
+										<strong class="pull-right" id="price_food_<%= key.gsub(",", "") %>"><%= number_to_currency_format price_food * value.to_f %></strong>
+									</td>
+								</tr>
+								<% key.split(",")[1..-1].each do |fo| %>
+									<% @food_option = Food.find_by id: fo %>
+									<tr>
+										<td>
+											<i class="icon_plus_alt"></i> <%= @food_option.name %>
+										</td>
+										<td>
+											<strong class="pull-right" id="price_food_<%= key.gsub(",", "") %>_<%= fo %>"><%= number_to_currency_format @food_option.price * value.to_f %></strong>
+										</td>
+									</tr>
+								<% end %>
+							<% end %>
+            </tbody>
+          </table>
+          <hr>
+          <table class="table table_summary">
+            <tbody>
+              <tr>
+                <td>
+                  Tổng món <span class="pull-right"><%= number_to_currency_format @subtotal %></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Phí giao hàng <span class="pull-right">₫</span><span class="pull-right">&nbsp;</span><span class="pull-right delivery_fee_cal"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="total">
+                  TỔNG <span class="pull-right">₫</span><span class="pull-right">&nbsp;</span><span class="pull-right total_delivery_fee_cal"><%= @subtotal %> </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <%= link_to t(".confirm_your_order"), express_checkout_place_path, method: :post, class: "btn_full", id: "button_create_order", data: { confirm: t(".are_you_sure") } %>
+          <%= link_to place_path(id: @place.id), class: "btn_full_outline" do %>
+            <i class="icon-right"></i> Thêm món khác</a>
+          <% end %>
+        </div>
+        <div id="cart_box">
+					<h3>Thông tin</h3>
+					<table class="table table_summary">
+						<tbody>
+							<tr>
+								<td width=100px><strong>Thời gian</strong></td>
+								<td><%= @place.start_time %> - <%= @place.close_time %></td>
+							</tr>
+							<tr>
+								<td><strong>SĐT</strong></td>
+								<td><a href="tel://<%= @place.phone %>"><%= @place.phone %></a></td>
+							</tr>
+							<tr>
+								<td><strong>Email</strong></td>
+								<td><%= @place.email %></td>
+							</tr>
+							<tr>
+								<td><strong>Website</strong></td>
+								<td><a href="<%= @place.website %>" target="_blank"><%= @place.website %></a></td>
+							</tr>
+							<tr>
+								<td><strong>Sức chứa</strong></td>
+								<td><%= @place.capacity %> người</td>
+							</tr>
+							<tr>
+								<td><strong>Chỉ dẫn</strong></td>
+								<td><%= @place.detail_direction %></td>
+							</tr>
+							<tr>
+								<td><strong>Mô tả</strong></td>
+								<td><%= @place.description %></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+        <div class="box_style_2 hidden-xs" id="help">
+          <i class="icon_lifesaver"></i>
+          <h4><%= t ".need_help" %></h4>
+          <a href="tel://84 987 654 321" class="phone">+84 987 654 321</a>
+          <small><%= t ".detail_need_help" %></small>
+        </div>
+      </div>
+      <!-- End theiaStickySidebar -->
+    </div>
+    <!-- End col-md-3 -->
+  </div>
+  <!-- End row -->
+</div>
+<!-- End container -->
+<!-- End Content =============================================== -->
+
+<%= render "shared/search" %>
+
+<%= javascript_include_tag "custom_place" %>

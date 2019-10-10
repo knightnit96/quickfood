@@ -1,0 +1,48 @@
+en:
+  hello: "Hello world"
+  search: "Search"
+  helpers:
+    label:
+      place:
+        name: "Name"
+        phone: "Phone"
+        email: "Email"
+        website: "Website"
+        category: "Category"
+        province: "Province"
+        detail_direction: "Detail direction"
+        description: "Description"
+        address: "Address"
+        capacity: "Capacity"
+        start_time: "Start time"
+        close_time: "Close time"
+        average_price: "Average price"
+      user:
+        name: "Name"
+        email: "Email"
+        gender: "Gender"
+        password: "Password"
+        new_password: "New password"
+        new_password_confirmation: "New password confirmation"
+  views:
+    pagination:
+      first: "«"
+      last: "»"
+      previous: "‹"
+      next: "›"
+      truncate: "…"
+  tooltip:
+    edit: "Edit"
+    location: "Location"
+    delete: "Delete"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      long: "%B %d, %Y %H:%M"
+      short: "%Y-%m-%d %H:%M"
+      short_time: "%H:%M"

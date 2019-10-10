@@ -1,0 +1,20 @@
+<%= form_for [:admin, @category] do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Nhập tên danh mục" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <input type="reset" value="<%= t(".reset") %>" class="btn btn-info">
+    <%= link_to admin_categories_path, class: "btn btn-default" do %>
+      <%= t(".cancel") %>
+    <% end %>
+  </div>
+<% end %>

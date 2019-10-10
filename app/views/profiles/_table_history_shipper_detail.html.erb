@@ -1,0 +1,33 @@
+<tr>
+  <td><%= load_page order_counter %></td>
+  <td>
+    <% if order.status == 4 %>
+      Thời gian giao: <%= l order.updated_at, format: :short %>
+    <% end %>
+  </td>
+  <td>
+    <strong><%= order.place_name %></strong><br/>
+    Địa chỉ: <%= order.place_address %>
+  </td>
+  <td>
+    <%= order.address_address %>
+  </td>
+  <td>
+    <%= number_to_currency_format order.total_price+order.fee %><br/>
+    <%= load_payment(order.payment) %>
+  </td>
+  <td class="text-center">
+    <strong id="cal_distance_<%= order.id %>" data-place-latitude="<%= order.place_latitude %>" data-place-longitude="<%= order.place_longitude %>" data-address-latitude="<%= order.address_latitude %>" data-address-longitude="<%= order.address_longitude %>"></strong>
+  </td>
+  <td>
+    <a class="btn" style="background: #85c99d; width:100%;"><%= load_status(order.status) %></a><br/>
+  </td>
+  <td class="text-center">
+    <a href data-toggle="modal" data-target="#modal_detail_order_shipper_<%= order.id %>">
+      Chi tiết đơn hàng
+    </a><br/>
+    <a href data-toggle="modal" data-target="#modal_detail_chat_shipper_<%= order.id %>">
+      Lịch sử chat
+    </a>
+  </td>
+</tr>

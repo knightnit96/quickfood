@@ -1,0 +1,47 @@
+en:
+  profiles:
+    index:
+      title: "Profile"
+      manage_profile: "Manage profile"
+      personal: "Personal"
+      basic_info: "Basic information"
+      change_password: "Change password"
+      update_avatar: "Update avatar"
+      logout: "Logout"
+      address_manage: "Address management"
+      order_history: "Order history"
+      manage_place: "Manage place"
+      manage_shipper: "Manage shipper"
+      are_you_sure: "Are you sure?"
+    form_basic_info:
+      save: "Save"
+      male: "Male"
+      female: "Female"
+    form_basic_info:
+      female: "Female"
+    update_avatar:
+      your_picture: "Your picture"
+      picture_available: "Picture available"
+    address_manage:
+      add_address: "Add address"
+      your_address: "Your address"
+      save: "Save"
+    manage_place:
+      place_info: "Place info"
+      place_menu: "Place menu"
+      place_menu_add: "Place menu - Add menu category"
+      place_food_add: "Place menu - Add menu item"
+      place_food_option: "Place menu - Add menu option"
+      save: "Save"
+      are_you_sure: "Are you sure?"
+    manage_shipper:
+      save: "Save"
+      edit_shipper: "Edit information shipper"
+      delivery_history: "Delivery history"
+      location: "Location"
+    modal_edit_menu_category:
+      save: "Save"
+    modal_edit_menu_item:
+      save: "Save"
+    modal_edit_menu_option:
+      save: "Save"

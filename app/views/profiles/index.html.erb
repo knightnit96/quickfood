@@ -1,0 +1,207 @@
+<% provide :title, t(".title") %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+    	<h1><%= t ".manage_profile" %></h1>
+    </div><!-- End sub_content -->
+	</div><!-- End subheader -->
+</section><!-- End section -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+      <li><%= link_to t(".title"), profiles_path %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<!-- Position -->
+<!-- Content ================================================== -->
+<div class="container margin_60">
+  <div id="tabs" class="tabs">
+    <nav>
+      <ul>
+        <li id="tab_personal"><a href="#personal" class="icon-profile"><span><%= t ".personal" %></span></a></li>
+        <li id="tab_order_history"><a href="#order_history" class="icon-order-history"><span><%= t ".order_history" %></span></a></li>
+        <% if @places&.any? %>
+          <li id="tab_manage_place"><a href="#manage_place" class="icon-manage-place"><span><%= t ".manage_place" %></span></a></li>
+        <% end %>
+        <% if @shipper %>
+          <li id="tab_manage_shipper"><a href="#manage_shipper" class="icon-manage-shipper"><span><%= t ".manage_shipper" %></span></a></li>
+        <% end %>
+        <li><a href="#section-9" class="icon-settings"><span>Cài đặt</span></a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <section id="personal">
+        <div class="row">
+          <div class="col-md-3" id="profile_sidebar">
+            <div class="theiaStickySidebar">
+              <div class="box_style_1" id="profile_box">
+                <ul id="cat_nav">
+                  <li>
+                    <% if current_user&.avatar.blank? %>
+                      <img src="/assets/img/default-avatar.jpg" id="avatar_profile">
+                    <% else %>
+                      <%= image_tag current_user.avatar_url, id: "avatar_profile" %>
+                    <% end %>
+                    <h4 id="name_profile"><%= current_user&.name %></h4>
+                  </li>
+                  <li>
+                    <%= link_to profiles_path(nav: "basic_info"), id: "basic_info" do %>
+                      <i class="icon-edit-1"></i> <%= t ".basic_info" %>
+                    <% end%>
+                  </li>
+                  <li>
+                    <%= link_to profiles_path(nav: "change_password"), id: "change_password" do %>
+                      <i class="icon-user"></i> <%= t ".change_password" %>
+                    <% end%>
+                  </li>
+                  <li>
+                    <%= link_to profiles_path(nav: "update_avatar"), id: "update_avatar" do %>
+                      <i class="icon-picture"></i> <%= t ".update_avatar" %>
+                    <% end%>
+                  </li>
+                  <li>
+                    <%= link_to profiles_path(nav: "address_manage"), id: "address_manage" do %>
+                      <i class="icon-address"></i> <%= t ".address_manage" %>
+                    <% end%>
+                  </li>
+                  <li>
+                    <%= link_to destroy_user_session_path, method: :delete do %>
+                      <i class="icon-logout"></i> <%= t ".logout" %>
+                    <% end%>
+                  </li>
+                </ul>
+              </div>
+              <!-- End box_style_1 -->
+            </div>
+            <!-- End theiaStickySidebar -->
+          </div>
+          <!-- End col-md-3 -->
+          <div class="col-md-9">
+            <% if @nav_controller == "address_manage" %>
+              <%= hidden_field_tag "nav_controller", "address_manage", class: "form-control" %>
+            <% end %>
+            <% if params[:nav] == "basic_info" || params[:nav].nil? %>
+              <h3 class="nomargin_top"><%= t ".basic_info" %></h3>
+              <div class="panel-group" id="profile_info">
+                <%= render "form_basic_info" %>
+              </div>
+            <% elsif params[:nav] == "change_password" %>
+              <h3 class="nomargin_top"><%= t ".change_password" %></h3>
+              <div class="panel-group" id="profile_change_password">
+                <%= render "form_change_password" %>
+              </div>
+            <% elsif params[:nav] == "update_avatar" %>
+              <h3 class="nomargin_top"><%= t ".update_avatar" %></h3>
+              <div class="panel-group" id="profile_update_avatar">
+                <%= render "update_avatar" %>
+              </div>
+            <% elsif params[:nav] == "address_manage" || params[:action] == "create_address" %>
+              <h3 class="nomargin_top"><%= t ".address_manage" %></h3>
+              <div class="panel-group" id="profile_address_manage">
+                <%= render "address_manage" %>
+              </div>
+            <% end %>
+          </div>
+          <!-- End col-md-9 -->
+        </div>
+        <!-- End row -->
+      </section>
+      <section id="order_history">
+        <%= render "table_history" %>
+        <%= render partial: "modal_table_history_detail", collection: @orders, as: :order %>
+      </section>
+      <!-- End section 1 -->
+      <% if @places&.any? %>
+        <section id="manage_place">
+          <div class="row">
+            <div class="col-md-3" id="profile_sidebar">
+              <div class="theiaStickySidebar">
+                <div class="box_style_1" id="profile_box">
+                  <ul id="cat_nav">
+                    <% @places.each do |place| %>
+                      <li>
+                        <%= link_to profiles_path(nav: "manage_place_"+place.id.to_s, tab: "manage_place"), id: "manage_place_"+place.id.to_s do %>
+                          <i class="icon-location"></i> <%= place.name %>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+                <!-- End box_style_1 -->
+              </div>
+              <!-- End theiaStickySidebar -->
+            </div>
+            <!-- End col-md-3 -->
+            <div class="col-md-9">
+              <% if params[:tab] == "manage_place" && params[:nav].present? %>
+                <h3 class="nomargin_top"><%= @place.name %>
+                  <label class="switch">
+                    <% if @place.status == 0 %>
+                      <input type="checkbox" id="on_off_manage_place" value="1" data-id="<%= @place.id %>">
+                    <% else %>
+                      <input type="checkbox" id="on_off_manage_place" value="0" data-id="<%= @place.id %>" checked>
+                    <% end %>
+                    <span class="slider round"></span>
+                  </label>
+                  <%= link_to(place_path(@place.id), method: :delete, class: "pull-right", data: { confirm: t(".are_you_sure") }) do %>
+                    <i class="icon-trash"></i>
+                  <% end %>
+                </h3>
+                <div class="panel-group" id="profile_manage_place">
+                  <%= render "manage_place" %>
+                </div>
+              <% end %>
+            </div>
+            <!-- End col-md-9 -->
+          </div>
+          <!-- End row -->
+        </section>
+        <!-- End section 2 -->
+      <% end %>
+      <% if @shipper %>
+        <section id="manage_shipper">
+          <h3 class="nomargin_top"><%= t ".manage_shipper" %>
+            <%= link_to(shipper_path(@shipper), method: :delete, class: "pull-right", data: { confirm: t(".are_you_sure") }) do %>
+              <i class="icon-trash"></i>
+            <% end %>
+            <label class="switch">
+              <% if @shipper.status == 0 %>
+                <input type="checkbox" id="on_off_location" value="1" data-id="<%= @shipper.id %>">
+              <% else %>
+                <input type="checkbox" id="on_off_location" value="0" data-id="<%= @shipper.id %>" checked>
+              <% end %>
+              <span class="slider round"></span>
+            </label>
+          </h3>
+          <div class="panel-group" id="profile_manage_shipper">
+            <%= render "manage_shipper" %>
+            <%= render partial: "modal_table_history_shipper_detail", collection: @orders_shipper, as: :order %>
+          </div>
+        </section>
+      <% end %>
+      <section id="section-9">
+
+      </section>
+      <!-- End section 3 -->
+    </div>
+    <!-- End content -->
+  </div>
+</div>
+<!-- End container  -->
+<!-- End Content =============================================== -->
+<div class="modal fade" id="modal_map_address" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <div id="map_address" class="is_map"></div>
+    </div>
+  </div>
+</div>
+<%= render "shared/search" %>
+
+<%= javascript_include_tag "theia-sticky-sidebar/dist/ResizeSensor.min" %>
+<%= javascript_include_tag "theia-sticky-sidebar/dist/theia-sticky-sidebar.min" %>
+<%= javascript_include_tag "custom_profile" %>

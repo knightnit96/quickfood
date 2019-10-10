@@ -1,0 +1,65 @@
+<%= form_for [:admin, @user] do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Nhập tên" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.text_field :email, class: "form-control", placeholder: "Nhập email" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :gender %>
+          <%= f.select :gender, [["Name", 1], ["Nữ", 2]], {include_blank: "Chọn giới tính"}, {class: "form-control"} %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: "form-control", placeholder: "Nhập mật khẩu" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Nhập xác nhận mật khẩu" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :avatar %>
+          <div class="input-group">
+            <div class="custom-file">
+              <%= f.file_field :avatar, class: "custom-file-input" %>
+              <%= f.label :avatar, "Chọn hình ảnh", class: "custom-file-label" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <input type="reset" value="<%= t(".reset") %>" class="btn btn-info">
+    <%= link_to admin_users_path, class: "btn btn-default" do %>
+      <%= t(".cancel") %>
+    <% end %>
+  </div>
+<% end %>

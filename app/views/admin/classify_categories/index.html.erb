@@ -1,0 +1,45 @@
+<% provide :title, t(".title") %>
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark"><%= t ".classify_category_management" %></h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><%= link_to t(".home"), admin_path %></li>
+            <li class="breadcrumb-item active"><%= t ".title" %></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="content">
+    <div class="card card-primary card-outline">
+      <div class="card-header">
+        <h3 class="card-title">
+          <%= link_to(new_admin_classify_category_path) do %>
+            <button type="button" class="btn btn-block btn-primary"><i class="fas fa-plus"></i> <%= t ".add_classify_category" %></button>
+          <% end %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <table id="datatable-setting" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th class="stt">#</th>
+              <th class="have_orderable"><%= t "table.name" %></th>
+              <th class="image"><%= t "table.icon" %></th>
+              <th class="image"><%= t "table.parent" %></th>
+              <th class="action"><%= t "table.action" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: "classify_category", collection: @classify_categories, as: :classify_category %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

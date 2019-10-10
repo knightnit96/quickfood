@@ -72,7 +72,7 @@ var HeaderVideo = (function ($, document) {
 
     var appendTeaserVideo = function() {
         if(Modernizr.video && !isMobile()) {
-            html = '<video autoplay="true" loop="loop" muted id="teaser-video" class="teaser-video"><source src="assets/intro.mp4" type="video/mp4"><source src="assets/intro.ogv" type="video/ogg"></video>';
+            html = '<video autoplay="true" loop="loop" muted id="teaser-video" class="teaser-video"><source src="/assets/intro.mp4" type="video/mp4"><source src="/assets/intro.ogv" type="video/ogg"></video>';
             settings.container.append(html);
         }
     };
@@ -121,3 +121,13 @@ var HeaderVideo = (function ($, document) {
     };
 
 })(jQuery, document);
+
+$(document).ready(function() {
+	'use strict';
+    HeaderVideo.init({
+    container: $('.header-video'),
+    header: $('.header-video--media'),
+    videoTrigger: $("#video-trigger"),
+    autoPlayVideo: true
+  });
+});

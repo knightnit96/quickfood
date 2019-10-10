@@ -1,0 +1,72 @@
+en:
+  static_pages:
+    home:
+      title: "Home"
+      deliver_your_office: "We also deliver to your office"
+      over_place: "Choose from over %{size} places"
+      view_all_place: "View all places"
+      how_it_work: "How it works"
+      search_by_address: "Search by address"
+      search_by_address_detail: "Find all places available in your zone."
+      choose_place: "Choose a places"
+      choose_place_detail: "We have more than 1000s of menus online."
+      pay_by_payment: "Pay by card or cash"
+      pay_by_payment_detail: "It's quick, easy and totally secure."
+      delivery_or_takeaway: "Delivery or takeaway"
+      delivery_or_takeaway_detail: "You are lazy? Are you backing home?"
+      minute_deliver: "The minutes that usually takes to deliver!"
+      reviews:
+        zero: "%{count} Review"
+        one: "%{count} Review"
+        other: "%{count} Reviews"
+      open_at: "Opens at "
+      average_price: " Average price: "
+    about:
+      title: "About"
+      about_us: "About us"
+      home: "Home"
+      some_about_us: "Some words about us"
+      detail_some_about_us: "An About Us Page is a page on your website that tells your readers all about you.
+        It includes a detailed description covering all aspects of your business and you as entrepreneurs. This
+        can include the products or services you are offering, how you came into being as a business, your mission
+        and vision, your aim, and maybe something about your future goals too. Your About Us page is your perfect
+        opportunity to tell a compelling story about your business."
+      mission: "Mission"
+      detail_mission: "Start your About Us page by telling your customers about yourself. What is unique about you,
+        what are your key features and what is your mission? Try to stand out by conveying your values and culture
+        as a brand, or what brought your company together. Use this area to fully answer the question of who you are
+        as a brand, and what you represent. This doesn’t mean that it has to be overly lengthy, but you can use this
+        space to communicate yourself in the way you are comfortable with, with your audience."
+      history: "History"
+      detail_history: "Take the visitors on your website to a trip down memory lane, and give them an insight to the
+        history behind your store. Here, you can show them where, how, and when you started, and everything your
+        business has accomplished on the way. This is your chance to share your relevant milestones and achievements
+        relating to your business in an engaging way. You can even choose to present your history to your viewers in
+        the form of a timeline, which allows you to display a large amount of information in a visually engaging
+        manner. Your customers or potential customers might be interested in seeing how you grew over the years."
+      quality_feauture: "Quick food quality feautures"
+      place: "Places"
+      detail_place: "There are over %{place} places nationwide on our system. They are all great places"
+      food_menu: "Food Menu"
+      detail_food_menu: "There are over %{food_menu} food menus nationwide on our system. They are all great food menus"
+      shipper: "Shippers"
+      detail_shipper: "There are over %{shipper} shippers nationwide on our system. They are all great shippers"
+      delivery: "<span>Delivery</span> or <span>Takeaway</span>"
+      detail_delivery: "There are two ways to pick up goods on our system. It is Delivery or Takeaway"
+      cash_payment: "<span>Cash</span> payment"
+      detail_cash_payment: "There are many ways to pay with our orders. Cash payments are the most common way"
+      card_payment: "<span>Secure card</span> payment"
+      detail_card_payment: "There are many ways to pay with our orders. Paying by credit card is the fastest way"
+      sologan: '"Customers are the number one priority"'
+      detail_sologan: "Without thinking for the benefit of the customers, the business cannot prosper. If we want to
+        benefit, then we must first sow the good of the good, then the good will repay us"
+    contact:
+      title: "Contacts"
+      customer_service: "Customer service"
+      place_support: "Places Support"
+      address_customer_service: "4F, FHome Building, 16 Ly Thuong Kiet Str., Hai Chau district, Da Nang"
+      work_time: "08:30 AM - 6:00 PM from Monday - Friday"
+      address_place_support_service: "3F, FHome Building, 16 Ly Thuong Kiet Str., Hai Chau district, Da Nang"
+    faq:
+      title: "FAQ"
+      faq: "Frequently asked questions"

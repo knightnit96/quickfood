@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Quickfood</title>
+    <title><%= full_title yield(:title) %></title>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag "img/favicon.ico" %>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,300,300italic' rel='stylesheet' type='text/css'>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyA9HnKl0PduHViL0ztMMwtoli4-c3FBk6o&libraries=geometry,places" %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+    <script type="text/javascript">
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    </script>
   </head>
-
   <body>
+    <!--[if lte IE 8]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
+    <![endif]-->
+    <%= render "shared/preloader" %>
+    <%= render "layouts/header" %>
+    <% flash.each do |message_type, message| %>
+      <%= content_tag :div, class: "notification_flash", data: {message: message, message_type: message_type} do %>
+      <% end %>
+    <% end %>
     <%= yield %>
+    <%= render "layouts/footer" %>
+    <div class="layer"></div>
+    <%= render "shared/modal_login" %>
+    <%= render "shared/modal_register" %>
+    <%= render "shared/live_chat" %>
+    <% if current_user&.confirm == false %>
+      <%= render "shared/modal_confirm_code" %>
+    <% end %>
   </body>
 </html>

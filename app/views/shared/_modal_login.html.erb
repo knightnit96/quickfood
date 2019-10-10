@@ -1,0 +1,44 @@
+ <!-- Login modal -->
+<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_for(user_session_path, method: :post, html: {class: "popup-form", id: "myLogin", format: :json}) do |f| %>
+        <div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+        <div class="error"></div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",
+            class: "form-control form-white", placeholder: :email, id: "user_email" %>
+        <%= f.password_field :password, autocomplete: "current-password",
+            class: "form-control form-white", placeholder: "Mật khẩu", id: "user_password" %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <% if devise_mapping.rememberable? %>
+                <div class="checkbox-holder text-left">
+                  <div class="checkbox nomargin">
+                    <%= f.check_box :remember_me, id: "user_remember_me" %>
+                    <label for="user_remember_me"><span><%= t ".remember_me" %></span></label>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="text-right">
+                <a href="#"><%= t ".forgot_pass" %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-submit nomargin ajax-signin-btn"><%= t ".login" %></button>
+        <div class="text-center margin_30">
+          <%= t ".dont_have_account" %>
+          <a href data-toggle="modal" data-target="#register" data-dismiss="modal"><%= t ".register" %></a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End modal -->
+
+<%= javascript_include_tag "session" %>

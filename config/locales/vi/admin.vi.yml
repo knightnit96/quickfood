@@ -1,0 +1,144 @@
+vi:
+  admin:
+    dashboard:
+      index:
+        title: "Trang điều khiển"
+      profile:
+        title: "Hồ sơ"
+    categories:
+      index:
+        title: "Danh mục"
+        category_management: "Quản lý danh mục"
+        add_category: "Thêm danh mục"
+        home: "Trang điều khiển"
+      new:
+        title: "Thêm danh mục"
+        add: "Thêm"
+        home: "Trang điều khiển"
+        category_management: "Quản lý danh mục"
+      edit:
+        title: "Sửa danh mục"
+        edit: "Sửa"
+        home: "Trang điều khiển"
+        category_management: "Quản lý danh mục"
+      form:
+        cancel: "Hủy bỏ"
+        reset: "Cài lại"
+    users:
+      index:
+        title: "Người dùng"
+        user_management: "Quản lý người dùng"
+        add_user: "Thêm người dùng"
+        home: "Trang điều khiển"
+      new:
+        title: "Thêm người dùng"
+        add: "Thêm"
+        home: "Trang điều khiển"
+        user_management: "Quản lý người dùng"
+      edit:
+        title: "Sửa người dùng"
+        edit: "Sửa"
+        home: "Trang điều khiển"
+        user_management: "Quản lý người dùng"
+      form:
+        cancel: "Hủy bỏ"
+        reset: "Cài lại"
+      form_create:
+        cancel: "Hủy bỏ"
+        reset: "Cài lại"
+      user:
+        detail_user: "Chi tiết người dùng"
+        email: "Email"
+        gender: "Giới tính"
+        role: "Vai trò"
+        address: "Địa chỉ"
+        common_name: "Tên thường gọi"
+        name: "Tên người nhận"
+        phone: "SĐT"
+    shippers:
+      index:
+        title: "Người giao hàng"
+        shipper_management: "Quản lý người giao hàng"
+        home: "Trang điều khiển"
+      shipper:
+        detail_shipper: "Chi tiết người giao hàng"
+        email: "Email"
+        gender: "Giới tính"
+        identity_card: "CMND"
+        province: "Tỉnh thành"
+    places:
+      index:
+        title: "Địa điểm"
+        place_management: "Quản lý địa điểm"
+        home: "Trang điều khiển"
+      place:
+        detail_place: "Chi tiết địa điểm"
+        owner: "Chủ địa điểm"
+        address: "Địa chỉ"
+        email: "Email"
+        gender: "Giới tính"
+        province: "Tỉnh thành"
+        category: "Danh mục"
+        phone: "SĐT"
+        detail_direction: "Chỉ đường chi tiết"
+        website: "Trang web"
+        direction: "Mô tả"
+        capacity: "Sức chứa"
+        start_time: "Thời gian mở cửa"
+        close_time: "Thời gian đóng cửa"
+        average_price: "Giá cả trung bình"
+        rating: "Xếp hạng"
+    orders:
+      index:
+        title: "Đơn hàng"
+        order_management: "Quản lý đơn hàng"
+        home: "Trang điều khiển"
+      modal_order:
+        detail_place: "Chi tiết địa điểm"
+        owner: "Chủ địa điểm"
+        address: "Địa chỉ"
+        email: "Email"
+        gender: "Giới tính"
+        province: "Tỉnh thành"
+        category: "Danh mục"
+        phone: "SĐT"
+        detail_direction: "Chỉ đường chi tiết"
+        website: "Trang web"
+        direction: "Mô tả"
+        capacity: "Sức chứa"
+        start_time: "Thời gian mở cửa"
+        close_time: "Thời gian đóng cửa"
+        average_price: "Giá cả trung bình"
+        rating: "Xếp hạng"
+        detail_shipper: "Chi tiết người giao hàng"
+        email: "Email"
+        gender: "Giới tính"
+        identity_card: "CMND"
+        province: "Tỉnh thành"
+        detail_user: "Chi tiết người dùng"
+        email: "Email"
+        gender: "Giới tính"
+        role: "Vai trò"
+        address: "Địa chỉ"
+        common_name: "Tên thường gọi"
+        name: "Tên người nhận"
+        phone: "SĐT"
+    classify_categories:
+      index:
+        title: "Phân mục"
+        classify_category_management: "Quản lý phân mục"
+        add_classify_category: "Thêm phân mục"
+        home: "Trang điều khiển"
+      new:
+        title: "Thêm phân mục"
+        add: "Thêm"
+        home: "Trang điều khiển"
+        classify_category_management: "Quản lý phân mục"
+      edit:
+        title: "Sửa phân mục"
+        edit: "Sửa"
+        home: "Trang điều khiển"
+        classify_category_management: "Quản lý phân mục"
+      form:
+        cancel: "Hủy bỏ"
+        reset: "Cài lại"

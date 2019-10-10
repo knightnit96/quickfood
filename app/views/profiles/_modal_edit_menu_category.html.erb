@@ -1,0 +1,38 @@
+<div class="modal fade" id="modal_edit_menu_category" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_tag update_menu_category_profiles_path(place_id: @place.id), method: :put do %>
+        <div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <label>Tên danh mục cũ</label>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= text_field_tag :old_name, "", class: "form-control form-white", disabled: true %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <label>Tên danh mục mới</label>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= text_field_tag :name, "", class: "form-control form-white", autocomplete: "name" %>
+            </div>
+          </div>
+        </div>
+        <%= hidden_field_tag "menu_category_id", "", class: "form-control" %>
+        <div class="row">
+          <div class="col-md-4 col-sm-4"></div>
+          <div class="col-md-4 col-sm-4"><button type="submit" class="btn btn-submit nomargin"><%= t ".save" %></button></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

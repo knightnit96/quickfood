@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="text-center">#</th>
+      <th class="text-center"><%= t "table.data_time" %></th>
+      <th class="text-center"><%= t "table.place" %></th>
+      <th class="text-center"><%= t "table.user" %></th>
+      <th class="text-center"><%= t "table.total_price" %></th>
+      <th class="text-center"><%= t "table.distance" %></th>
+      <th class="text-center"><%= t "table.status" %></th>
+      <th class="text-center"><%= t "table.detail" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @orders_shipper.blank? %>
+      <tr>
+        <td class="text-center" colspan="8"><%= t "table.not_found" %></td>
+      </tr>
+    <% else %>
+      <%= render partial: "table_history_shipper_detail", collection: @orders_shipper, as: :order %>
+      <% order = "" %>
+      <% @orders_shipper.each do |os| %>
+        <% if @orders_shipper.first == os %>
+          <% order += os.id.to_s %>
+        <% else %>
+          <% order += "," + os.id.to_s %>
+        <% end %>
+      <% end %>
+      <div id="list_orders_shipper" data-list="<%= order %>"></div>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @orders_shipper, params: {tab: "manage_shipper", nav: nil} if @orders_shipper.present? %>
+
+<%= javascript_include_tag "custom_shipper" %>

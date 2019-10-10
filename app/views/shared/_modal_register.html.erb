@@ -1,0 +1,32 @@
+<!-- Register modal -->
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_for(create_user_profiles_path, method: :post, html: {class: "popup-form", id: "myLogin", format: :json}) do |f| %>
+        <div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+        <div class="error_register"></div>
+        <%= f.text_field :name, class: "form-control form-white", placeholder: "Tên", id: "register_user_name" %>
+        <%= f.email_field :email, class: "form-control form-white", placeholder: :email, id: "register_user_email" %>
+        <%= f.password_field :password, class: "form-control form-white", placeholder: "Mật khẩu", id: "register_user_password" %>
+        <%= f.password_field :password_confirmation, class: "form-control form-white", placeholder: "Xác nhận mật khẩu", id: "register_user_password_confirmation" %>
+        <%= f.select :gender, [["Nam", 1], ["Nữ", 2]], {include_blank: "Chọn giới tính"}, {class: "form-control form-white", id: "register_user_gender"} %>
+        <%= f.text_field :address, class: "form-control form-white", placeholder: "Địa chỉ", id: "register_user_address" %>
+        <%= f.number_field :phone, class: "form-control form-white", placeholder: "SĐT", id: "register_user_phone" %>
+        <div class="checkbox-holder text-left">
+          <div class="checkbox">
+            <%= f.check_box :condition, id: "check_condition" %>
+            <label for="check_condition"><span>Tôi đồng ý với <a href="/faq" target="_blank"><strong>các điều khoản &amp; điều kiện</strong></a></span></label>
+          </div>
+        </div>
+        <button type="button" class="btn btn-submit nomargin ajax-signup-btn"><%= t ".register" %></button>
+        <div class="text-center margin_30">
+          <%= t ".have_account" %>
+          <a href data-toggle="modal" data-target="#login_2" data-dismiss="modal"><%= t ".login" %></a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Register modal -->
+
+<%= javascript_include_tag "session" %>

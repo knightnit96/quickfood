@@ -1,0 +1,48 @@
+<% provide :title, t(".title") %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+      <h1><%= t ".title" %></h1>
+    </div><!-- End sub_content -->
+  </div><!-- End subheader -->
+</section>
+<!-- End section -->
+<!-- End SubHeader ============================================ -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+      <li><%= link_to t(".title"), contact_path %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<!-- Position -->
+<!-- Content ================================================== -->
+<div class="container margin_60_35">
+  <div class="row" id="contacts">
+    <div class="col-md-6 col-sm-6">
+      <div class="box_style_2">
+        <h2 class="inner"><%= t ".customer_service" %></h2>
+        <p><a><i class="icon-location-circled"></i>  <%= t ".address_customer_service" %></a></p>
+        <p><a><i class="icon-calendar-circled"></i>  <%= t ".work_time" %></a></p>
+        <p><a href="tel://004542344599" class="phone"><i class="icon-phone-circled"></i>  +84 987 654 321</a></p>
+        <p class="nopadding"><a href="mailto:customercare@quickfood.com"><i class="icon-mail-3"></i> customercare@quickfood.com</a></p>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="box_style_2">
+        <h2 class="inner"><%= t ".place_support" %></h2>
+        <p><a><i class="icon-location-circled"></i>  <%= t ".address_place_support_service" %></a></p>
+        <p><a><i class="icon-calendar-circled"></i>  <%= t ".work_time" %></a></p>
+        <p><a href="tel://004542344599" class="phone"><i class="icon-phone-circled"></i>  +84 987 789 987</a></p>
+        <p class="nopadding"><a href="mailto:support@quickfood.com"><i class="icon-mail-3"></i> support@quickfood.com</a></p>
+      </div>
+    </div>
+  </div>
+  <!-- End row -->
+</div>
+<!-- End container -->
+<!-- End Content =============================================== -->
+<%= render "shared/search" %>

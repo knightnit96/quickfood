@@ -1,0 +1,23 @@
+vi:
+  layouts:
+    footer:
+      payment: "Thanh toán an toàn với"
+      about: "Thông tin"
+      about_us: "Về chúng tôi"
+      faq: "Câu hỏi thường gặp"
+      contact: "Liên hệ"
+      login: "Đặng nhập"
+      register: "Đăng kí"
+      term_condition: "Các điều khoản và điều kiện"
+      news_letter: "Bản tin"
+      detail_news_letter: "Tham gia bản tin của chúng tôi để được thông báo về cung cấp và tin tức."
+    header:
+      login: "Đăng nhập"
+      register: "Đăng kí"
+      language: "Ngôn ngữ"
+      vietnamese: "Tiếng Việt"
+      english: "Tiếng Anh"
+      register_shipper: "Đăng ký làm người giao hàng"
+      create_place: "Tạo địa điểm"
+      manage_your_account: "Quản lý tài khoản"
+      logout: "Đăng xuất"

@@ -1,0 +1,40 @@
+<tr>
+  <td><%= load_page order_counter %></td>
+  <td><%= order.place_address %></td>
+  <td><%= order.address_address %></td>
+  <td><%= User.find_by(id: order.shipper_user_id).name if order.shipper.present? %></td>
+  <td><%= number_to_currency_format order.total_price+order.fee %></td>
+  <td>
+    <% if order.payment == 0 %>
+      Thanh toán bằng tiền mặt
+    <% elsif order.payment == 1 %>
+      Thanh toán bằng thẻ tín dụng
+    <% elsif order.payment == 2 %>
+      Thanh toán bằng Paypal
+    <% end %>
+  </td>
+  <td>
+    <% if order.status == 0 %>
+      <button type="button" class="btn btn-block btn-primary btn-sm">Đang xác nhận</button>
+    <% elsif order.status == 1 %>
+      <button type="button" class="btn btn-block btn-primary btn-sm">Đang tìm tài xế</button>
+    <% elsif order.status == 2 %>
+      <button type="button" class="btn btn-block btn-info btn-sm">Đang nhận hàng</button>
+    <% elsif order.status == 3 %>
+      <button type="button" class="btn btn-block btn-info btn-sm">Đang giao hàng</button>
+    <% elsif order.status == 4 %>
+      <button type="button" class="btn btn-block btn-success btn-sm">Đã xong</button>
+    <% elsif order.status == 5 %>
+      <button type="button" class="btn btn-block btn-danger btn-sm">Đã hủy</button>
+    <% end %>
+  </td>
+  <td>
+    <a href data-toggle="modal" data-target="#modal_detal_order_admin_<%= order.id %>">
+      <span class="fas fa-info"></span>
+    </a>
+    &nbsp;&nbsp;&nbsp;
+    <a href data-toggle="modal" data-target="#modal_detal_chat_admin_<%= order.id %>">
+      <span class="fas fa-comments"></span>
+    </a>
+  </td>
+</tr>

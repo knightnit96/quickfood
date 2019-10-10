@@ -1,0 +1,347 @@
+<% provide :title, @place.name %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+      <div id="thumb"><img src="/assets/img/quants.jpg" alt=""></div>
+			<% overall @place %>
+			<div data="<%= @overall %>" class="rateyo-readonly" style="margin: auto;"></div>
+			(<small id="overall_review_a"><%= t ".reviews", count: @place.rates.count(:rating) %></small>)
+      <h1><%= @place.name %></h1>
+      <div><em><%= by_category_name @place.category_id %> / <%= by_province_name @place.province_id %>, <%= Province.find_by(id: @place.province_parent_id).name %></em></div>
+
+      <div><i class="icon_pin"></i> <%= @place.address %> - <strong><%= t ".delivery_charge" %></strong><%= t ".detail_delivery_charge" %></div>
+    </div>
+    <!-- End sub_content -->
+  </div>
+  <!-- End subheader -->
+</section>
+<!-- End section -->
+<!-- End SubHeader ============================================ -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+			<li><%= link_to "Danh sách địa điểm", list_path(province: to_slug_province(@province.name)) %></li>
+      <li><%= link_to @place.name, place_path(id: @place.id) %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<!-- Position -->
+<div class="collapse" id="collapseMap">
+	<div id="map" class="map" data-longitude=<%= @place.longitude %> data-latitude=<%= @place.latitude %>></div>
+</div><!-- End Map -->
+<!-- Content ================================================== -->
+<div class="container margin_60_35">
+		<div class="row">
+			<div class="col-md-3">
+				<p>
+					<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap"><%= t ".view_on_map" %></a>
+				</p>
+				<div class="box_style_1">
+					<ul id="cat_nav">
+						<% @menu_categories.each do |menu_cat| %>
+							<li><a href="#menu_<%= menu_cat.id %>" class="<% if @menu_categories.first == menu_cat %>active<% end %>"><%= menu_cat.name %> <span>(<%= list_menu_item(menu_cat.id).length %>)</span></a></li>
+						<% end %>
+					</ul>
+				</div><!-- End box_style_1 -->
+				<div class="box_style_2 hidden-xs" >
+					<% if user_signed_in? %>
+						<% if Rate.find_by(place_id: @place.id, user_id: current_user.id).blank? %>
+							<button data-toggle="modal" data-target="#modal_add_review" class="btn_full" id="btn_review_now"><%= t ".review_now" %></button>
+						<% end %>
+					<% else %>
+						<p>Vui lòng đăng nhập để  đánh giá</p>
+					<% end %>
+					<hr>
+					<div class="review_list">
+						<% if @reviews.any? %>
+							<% i = 0 %>
+							<% @reviews.each do |review| %>
+								<div class="review_strip_single review_item" <% if i >= 5 %>style="display:none"<% end %>>
+									<img src="<%= review.user.avatar.url %>" alt="" class="img-circle" width="50px">
+									<h4><%= review.user.name %>
+									<% if user_signed_in? %>
+										<% if review.user.id == current_user.id %>
+											<%= link_to "javascript:void(0)", class: "delete_review_btn", data_id: review.id, pid: @place.id do %>
+												<i class="icon-trash"></i>
+											<% end %>
+										<% end %>
+									<% end %>
+									</h4>
+									<div class="rating">
+										<% review.rating.times.each do %>
+											<i class="icon_star voted"></i>
+										<% end %>
+										<small><%= l review.updated_at, format: :short %></small>
+									</div>
+									<p class="nomargin"><%= review.content %></p>
+								</div>
+								<% i += 1 %>
+							<% end %>
+						<% end %>
+					</div>
+					<div id="has_review">
+						<% if @reviews.any? %>
+							<div id="loadMore">
+								<a href="#"><%= t ".load_more" %></a>
+							</div>
+						<% else %>
+							<div id="not_have_review">
+								<%= t ".not_have_review"%>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div><!-- End col-md-3 -->
+			<div class="col-md-6">
+				<div class="box_style_2" id="main_menu">
+					<h2 class="inner"><%= t ".menu" %></h2>
+					<% @menu_categories.each do |menu_cat| %>
+						<h3 class="nomargin_top" id="menu_<%= menu_cat.id %>"><%= menu_cat.name %></h3>
+						<table class="table table-striped cart-list">
+							<thead>
+								<tr>
+									<th>Thức ăn</th>
+									<th width="20%">Giá</th>
+									<th width="10%">Tùy chọn</th>
+									<% if user_signed_in? %>
+										<th width="15%"></th>
+									<% end %>
+								</tr>
+							</thead>
+							<tbody>
+								<% list_menu_item(menu_cat.id).each do |menu_item| %>
+									<tr>
+										<td>
+											<figure class="thumb_menu_list">
+												<% if menu_item.image.present? %>
+													<% photo_url = menu_item.image_url %>
+												<% else %>
+													<% photo_url = "/assets/img/image-not-available.jpg" %>
+												<% end %>
+												<%= image_tag photo_url %>
+											</figure>
+											<h5><%= menu_item.name %></h5>
+										</td>
+										<td>
+											<% if menu_item.discount.present? %>
+												<strong><del><%= number_to_currency_format menu_item.price %></del></strong><br />
+												<strong><%= number_to_currency_format menu_item.discount %></strong>
+											<% else %>
+												<strong><%= number_to_currency_format menu_item.price %></strong>
+											<% end %>
+										</td>
+										<td class="options">
+											<div class="dropdown dropdown-options">
+												<a href class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
+												<div class="dropdown-menu">
+													<h5>Chọn một tùy chọn</h5>
+													<% if list_menu_option_radio(menu_item.id).blank? %>
+														Không có mục tùy chọn nào
+													<% else %>
+														<label>
+															<input type="radio" value="0" name="options_<%= menu_item.id %>" class="input_food_option_radio" data-food-item="<%= menu_item.id %>" checked>None
+															<span>
+																+ <%= number_to_currency_format 0 %>
+															</span>
+														</label>
+													<% end %>
+													<% list_menu_option_radio(menu_item.id).each do |mo_radio| %>
+														<label>
+															<input type="radio" value="<%= mo_radio.id %>" name="options_<%= menu_item.id %>" class="input_food_option_radio" data-food-item="<%= menu_item.id %>"><%= mo_radio.name %>
+															<span>
+																+ <%= number_to_currency_format mo_radio.price %>
+															</span>
+														</label>
+													<% end %>
+													<h5>Thêm thành phần</h5>
+													<% if list_menu_option_checkbox(menu_item.id).blank? %>
+														Không có mục tùy chọn nào
+													<% end %>
+													<% list_menu_option_checkbox(menu_item.id).each do |mo_checkbox| %>
+														<label>
+															<input type="checkbox" value="<%= mo_checkbox.id %>" name="options_checkbox_<%= menu_item.id %>" class="input_food_option_checkbox" data-food-item="<%= menu_item.id %>"><%= mo_checkbox.name %>
+															<span>
+																+ <%= number_to_currency_format mo_checkbox.price %>
+															</span>
+														</label>
+													<% end %>
+												</div>
+											</div>
+										</td>
+										<% if user_signed_in? %>
+											<td>
+												<%= button_tag type: "button", class: "btn_1 add_item_to_cart", id: "add_cart_item_"+menu_item.id.to_s, data: {item: menu_item.id, option_radio: "", option_checkbox: "", id: @place.id} do %>
+													<i class="icon-plus"></i>
+												<% end %>
+											</td>
+										<% end %>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+						<hr class="styled">
+					<% end %>
+				</div><!-- End box_style_1 -->
+				<div class="box_style_2">
+					<h2 class="inner">Phân mục</h2>
+					<% @classify_no_icon_parent.each do |no_icon| %>
+						<h4><strong><%= no_icon.name %>:</strong>
+							<% check = true %>
+							<% @classifies.each do |classify| %>
+								<% if classify.classify_category_parent_id == no_icon.id %>
+									<%= classify.classify_category_name if check == true %>
+									<%= ", "+classify.classify_category_name if check == false %>
+									<% check = false %>
+								<% end %>
+							<% end %>
+						</h4>
+					<% end %>
+					<% @classify_icon_parent.each do |icon| %>
+						<h4><strong><%= icon.name %>:</strong></h4>
+						<div class="row">
+							<% @classifies.each do |classify| %>
+								<% if classify.classify_category_parent_id == icon.id %>
+									<div class="col-md-6">
+										<h5>
+											<i class="<%= classify.classify_category_icon %>"></i>
+											<%= classify.classify_category_name %>
+										</h5>
+									</div>
+								<% end %>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div><!-- End col-md-6 -->
+			<div class="col-md-3" id="sidebar">
+        <div class="theiaStickySidebar">
+				<div>
+					<h3>Thông tin</h3>
+					<h4>
+						<% if @place.status == 0 %>
+							<strong style="color: red;">Đang đóng cửa</strong>
+						<% else %>
+							<strong style="color: blue;">Đang mở cửa</strong>
+						<% end %>
+					</h4>
+					<table class="table table_summary">
+						<tbody>
+							<tr>
+								<td width=100px><strong>Thời gian</strong></td>
+								<td><%= @place.start_time %> - <%= @place.close_time %></td>
+							</tr>
+							<tr>
+								<td><strong>SĐT</strong></td>
+								<td><a href="tel://<%= @place.phone %>"><%= @place.phone %></a></td>
+							</tr>
+							<tr>
+								<td><strong>Email</strong></td>
+								<td><%= @place.email %></td>
+							</tr>
+							<tr>
+								<td><strong>Website</strong></td>
+								<td><a href="<%= @place.website %>" target="_blank"><%= @place.website %></a></td>
+							</tr>
+							<tr>
+								<td><strong>Sức chứa</strong></td>
+								<td><%= @place.capacity %> người</td>
+							</tr>
+							<tr>
+								<td><strong>Chỉ dẫn</strong></td>
+								<td><%= @place.detail_direction %></td>
+							</tr>
+							<tr>
+								<td><strong>Mô tả</strong></td>
+								<td><%= @place.description %></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="cart_box" >
+					<h3>Giỏ hàng của bạn <i class="icon_cart_alt pull-right"></i></h3>
+					<% if user_signed_in? %>
+						<table class="table table_summary">
+							<tbody id="cart">
+								<% @foods.each do |key, value| %>
+									<% @food_item = Food.find_by id: key.split(",")[0] %>
+									<% price_food = @food_item.price %>
+									<% price_food = @food_item.discount if @food_item.discount.present? %>
+									<tr>
+										<td>
+											<input type="number" min="0" max="99" value="<%= value %>" class="text-center change_quantity" data-id="<%= @place.id %>" data-key="<%= key %>" id="quantity_food_<%= key.gsub(",", "") %>"> <%= @food_item.name %>
+										</td>
+										<td>
+											<strong class="pull-right" id="price_food_<%= key.gsub(",", "") %>"><%= number_to_currency_format price_food * value.to_f %></strong>
+										</td>
+									</tr>
+									<% key.split(",")[1..-1].each do |fo| %>
+										<% @food_option = Food.find_by id: fo %>
+										<tr>
+											<td>
+												<i class="icon_plus_alt"></i> <%= @food_option.name %>
+											</td>
+											<td>
+												<strong class="pull-right" id="price_food_<%= key.gsub(",", "") %>_<%= fo %>"><%= number_to_currency_format @food_option.price * value.to_f %></strong>
+											</td>
+										</tr>
+									<% end %>
+								<% end %>
+							</tbody>
+						</table>
+						<hr>
+						<h3>TỔNG <span class="pull-right" id="price_subtotal"><%= number_to_currency_format @subtotal %></span></h3>
+						<hr>
+						<%= link_to t(".order_now"), show_order_place_path, class: "btn_full" %>
+					<% else %>
+						<p>Vui lòng đăng nhập để mua hàng</p>
+					<% end %>
+				</div><!-- End cart_box -->
+        </div><!-- End theiaStickySidebar -->
+				<div class="box_style_2 hidden-xs" id="help">
+					<i class="icon_lifesaver"></i>
+					<h4><%= t ".need_help" %></h4>
+					<a href="tel://84 987 654 321" class="phone">+84 987 654 321</a>
+					<small><%= t ".detail_need_help" %></small>
+				</div>
+			</div><!-- End col-md-3 -->
+		</div><!-- End row -->
+</div><!-- End container -->
+<!-- End Content =============================================== -->
+<% if user_signed_in? %>
+	<div class="modal fade" id="modal_add_review" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content modal-popup">
+				<div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+				<div class="review_box">
+          <h2>Review <%= @place.name %></h2>
+          <div class="col-md-6 d-flex align-items-center">
+            <h4><%= t ".your_rating" %>:</h4>
+          </div>
+					<div class="col-md-6 d-flex align-items-center">
+            <div pid="<%= @place.id %>" class="rateyo rateyo_custom"></div>
+          </div>
+          <form action="javascript:void(0)" class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <textarea class="form-control" name="content" id="content" rows="3" placeholder="Nhận xét"></textarea>
+              </div>
+              <div class="col-md-12 text-right">
+								<button type="button" id="rate" class="btn btn-submit nomargin"><%= t ".submit" %></button>
+              </div>
+            </div>
+          </form>
+          <div class="css-script-clear"></div>
+        </div>
+			</div>
+		</div>
+	</div>
+
+	<%= javascript_include_tag "ajax_rating" %>
+<% end %>
+
+<%= render "shared/search" %>
+
+<%= javascript_include_tag "custom_place" %>
