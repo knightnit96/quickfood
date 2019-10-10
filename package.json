@@ -1,0 +1,12 @@
+{
+  "name": "quickfood",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^4.0.7",
+    "html5shiv": "^3.7.3",
+    "respond.min.js": "^1.4.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.8.1"
+  }
+}
