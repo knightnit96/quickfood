@@ -1,0 +1,111 @@
+<% provide :title, t(".title") %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+    	<h1><%= t ".about_us" %></h1>
+    </div><!-- End sub_content -->
+	</div><!-- End subheader -->
+</section><!-- End section -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+      <li><%= link_to t(".about_us"), about_path %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<!-- Position -->
+<!-- Content ================================================== -->
+<div class="container margin_60_35">
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class="nomargin_top"><%= t ".some_about_us" %></h3>
+      <p><%= t ".detail_some_about_us" %></p>
+      <h4><%= t ".mission" %></h4>
+      <p><%= t ".detail_mission" %></p>
+      <h4><%= t ".history" %></h4>
+      <p><%= t ".detail_history" %></p>
+    </div>
+    <div class="col-md-7 col-md-offset-1 text-right hidden-sm hidden-xs">
+      <img src="/assets/img/devices.jpg" alt="" class="img-responsive">
+    </div>
+  </div>
+  <!-- End row -->
+  <hr class="more_margin">
+  <div class="main_title">
+    <h2 class="nomargin_top"><%= t ".quality_feauture" %></h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
+      <div class="feature">
+        <i class="icon_pin_alt"></i>
+        <h3><span>+ <%= @places.count %></span> <%= t ".place" %></h3>
+        <p><%= t ".detail_place", place: @places.count %></p>
+      </div>
+    </div>
+    <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
+      <div class="feature">
+        <i class="icon_documents_alt"></i>
+        <h3><span>+ 1000</span> <%= t ".food_menu" %></h3>
+        <p><%= t ".detail_food_menu", food_menu: 1000 %></p>
+      </div>
+    </div>
+  </div>
+  <!-- End row -->
+  <div class="row">
+    <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
+      <div class="feature">
+        <i class="icon_profile"></i>
+        <h3><span>+ 1000</span> <%= t ".shipper" %></h3>
+        <p><%= t ".detail_shipper", shipper: 1000 %></p>
+      </div>
+    </div>
+    <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
+      <div class="feature">
+        <i class="icon_bag_alt"></i>
+        <h3><%= raw t(".delivery") %></h3>
+        <p><%= t ".detail_delivery" %></p>
+      </div>
+    </div>
+  </div>
+  <!-- End row -->
+  <div class="row">
+    <div class="col-md-6 wow fadeIn" data-wow-delay="0.5s">
+      <div class="feature">
+        <i class="icon_wallet"></i>
+        <h3><%= raw t(".cash_payment") %></h3>
+        <p><%= t ".detail_cash_payment" %></p>
+      </div>
+    </div>
+    <div class="col-md-6 wow fadeIn" data-wow-delay="0.6s">
+      <div class="feature">
+        <i class="icon_creditcard"></i>
+        <h3><%= raw t(".card_payment") %></h3>
+        <p><%= t ".detail_card_payment" %></p>
+      </div>
+    </div>
+  </div>
+  <!-- End row -->
+</div>
+<!-- End container -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 nopadding features-intro-img">
+      <div class="features-bg">
+        <div class="features-img">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 nopadding">
+      <div class="features-content">
+        <h3><%= t ".sologan" %></h3>
+        <p><%= t ".detail_sologan" %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End container-fluid  -->
+<!-- End Content =============================================== -->
+<%= render "shared/search" %>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= full_title yield(:title) %></title>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= favicon_link_tag "img/favicon.ico" %>
+    <meta name='turbolinks-visit-control' content='reload'>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyA9HnKl0PduHViL0ztMMwtoli4-c3FBk6o&libraries=places" %>
+    <%= stylesheet_link_tag "admin/application", media: "all", "data-turbolinks-track": "reload" %>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <%= javascript_include_tag "admin/application", "data-turbolinks-track": "reload" %>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+      <%= render "layouts/admin/header" %>
+      <% flash.each do |message_type, message| %>
+        <%= content_tag :div, class: "notification_flash", data: {message: message, message_type: message_type} do %>
+        <% end %>
+      <% end %>
+      <%= render "layouts/admin/left_bar" %>
+      <%= yield %>
+      <%= render "layouts/admin/footer" %>
+    </div>
+  </body>
+</html>

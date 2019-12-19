@@ -1,0 +1,95 @@
+<tr>
+  <td><%= load_page user_counter %></td>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td>
+    <%= image_tag user.avatar_url, class: "img-fluid", width: "100px" %>
+  </td>
+  <td>
+    <% if user.gender == 1 %>
+      male
+    <% elsif user.gender == 2 %>
+      female
+    <% end %>
+  </td>
+  <td><%= user.role %></td>
+  <td>
+    <label class="switch">
+      <% if user.locked_at.nil? %>
+        <input type="checkbox" id="on_off_user_<%= user.id %>" class="checkbox_active_user" value="1" data-id="<%= user.id %>" checked>
+      <% else %>
+        <input type="checkbox" id="on_off_user_<%= user.id %>" class="checkbox_active_user" value="0" data-id="<%= user.id %>">
+      <% end %>
+      <span class="slider round"></span>
+    </label>
+  </td>
+  <td>
+    <a href data-toggle="modal" data-target="#modal_detal_user_<%= user.id %>">
+      <span class="fas fa-info"></span>
+    </a>
+    &nbsp;&nbsp;&nbsp;
+    <%= link_to(edit_admin_user_path(user)) do %>
+      <span class="fas fa-edit"></span>
+    <% end %>
+    &nbsp;&nbsp;&nbsp;
+    <% unless current_user.id == user.id %>
+      <%= link_to(admin_user_path(user), method: :delete, data: { confirm: t("javascript.are_you_sure") }) do %>
+        <span class="fas fa-trash-alt"></span>
+      <% end %>
+    <% end %>
+
+  </td>
+</tr>
+<div class="modal fade" id="modal_detal_user_<%= user.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= t ".detail_user" %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="details_item">
+                <h4><%= user.name %></h4>
+                <ul class="list">
+                  <li><span><%= t ".email" %></span> : <%= user.email %></li>
+                  <% if user.gender == 1 %>
+                    <li><span><%= t ".gender" %></span> : male</li>
+                  <% elsif user.gender == 2 %>
+                    <li><span><%= t ".gender" %></span> : female</li>
+                  <% end %>
+                  <li><span><%= t ".role" %></span> : <%= user.role %></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="details_item">
+                <%= image_tag user.avatar_url, class: "img-fluid" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <%= t ".address" %>
+              <ul class="list">
+                <% list_address(user.id).each do |address| %>
+                  <li><%= address.address %>
+                    <ul class="list">
+                      <li><span><%= t ".common_name" %></span> : <%= address.common_name %></li>
+                      <li><span><%= t ".name" %></span> : <%= address.name %></li>
+                      <li><span><%= t ".phone" %></span> : <%= address.phone %></li>
+                    </ul>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

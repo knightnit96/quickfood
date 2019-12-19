@@ -1,0 +1,21 @@
+<%= form_for @shipper do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="form-group">
+        <%= f.label :province_id %>
+        <%= f.collection_select :province_id, @provinces, :id, :name, {include_blank: "Chọn tỉnh thành"}, {class: "form-control"} %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="form-group">
+        <%= f.label :identity_card %>
+        <%= f.text_field :identity_card, autocomplete: "identity_card", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <hr class="styled">
+  <div class="text-center"><%= f.submit t(".submit"), class: "btn_full_outline" %></div>
+<% end %>

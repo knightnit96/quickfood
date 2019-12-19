@@ -1,0 +1,173 @@
+<% provide :title, t(".title") %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+      <h1 id="remove_place_filter" data-size="<%= @places.size %>" data-province="<%= @province.name %>"><%= t ".all_place", {size: @places.size, province: @province.name} %></h1>
+    </div>
+    <!-- End sub_content -->
+  </div>
+  <!-- End subheader -->
+</section>
+<!-- End section -->
+<!-- End SubHeader ============================================ -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+      <li><%= link_to "Danh sách địa điểm", list_path(province: to_slug_province(@province.name)) %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<!-- Position -->
+<!-- Content ================================================== -->
+<div class="container margin_60_35">
+  <div class="row">
+    <div class="col-md-3">
+      <div id="filters_col">
+        <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt">Bộ lọc <i class="icon-plus-1 pull-right"></i></a>
+        <div class="collapse" id="collapseFilters">
+          <%= form_tag(list_path(province: to_slug_province(@province.name)), method: :get, id: "click-submit-filter") do %>
+            <div class="filter_type">
+              <h6>Khoảng cách</h6>
+              <input type="text" id="range" value="" name="range">
+            </div>
+            <div class="filter_type">
+              <h6>Xếp hạng</h6>
+              <ul>
+                <li><label><input type="radio" name="rating" class="icheck radio-rating" id="rating-5" value="5"><span class="rating">
+                  <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i>
+                  </span></label>
+                </li>
+                <li><label><input type="radio" name="rating" class="icheck radio-rating" id="rating-4" value="4"><span class="rating">
+                  <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+                  </span></label>
+                </li>
+                <li><label><input type="radio" name="rating" class="icheck radio-rating" id="rating-3" value="3"><span class="rating">
+                  <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i>
+                  </span></label>
+                </li>
+                <li><label><input type="radio" name="rating" class="icheck radio-rating" id="rating-2" value="2"><span class="rating">
+                  <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+                  </span></label>
+                </li>
+                <li><label><input type="radio" name="rating" class="icheck radio-rating" id="rating-1" value="1"><span class="rating">
+                  <i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+                  </span></label>
+                </li>
+              </ul>
+            </div>
+            <div class="filter_type">
+              <h6>Danh mục</h6>
+              <ul class="nomargin">
+                <% @categories.each do |cat| %>
+                  <li><label><input type="checkbox" class="icheck checkbox-category" id="checkbox_category_<%= cat.id %>" value="<%= cat.id %>"><%= cat.name %> (<%= @places_all.by_cat(cat.id).count %>)</label></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="filter_type">
+              <h6>Quận huyện</h6>
+              <ul class="nomargin">
+                <% @list_provinces.each do |province| %>
+                  <li><label><input type="checkbox" class="icheck checkbox-district" id="checkbox_district_<%= province.id %>" value="<%= province.id %>"><%= province.name %> (<%= @places_all.by_province(province.id).count %>)</label></li>
+                <% end %>
+              </ul>
+            </div>
+           <% end %>
+        </div>
+        <!--End collapse -->
+      </div>
+      <!--End filters col-->
+    </div>
+    <!--End col-md -->
+    <div class="col-md-9">
+      <div id="tools">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="styled-select">
+              <select name="sort_rating" id="sort_rating">
+                <option value="" selected>Sort by ranking</option>
+                <option value="lower">Lowest ranking</option>
+                <option value="higher">Highest ranking</option>
+              </select>
+            </div>
+          </div>
+          <% if @addresses.present? %>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+              <div class="styled-select">
+                <% place = "" %>
+                <% @places.each do |pl| %>
+                  <% if @places.first == pl %>
+                    <% place += pl.id.to_s %>
+                  <% else %>
+                    <% place += "," + pl.id.to_s %>
+                  <% end %>
+                <% end %>
+                <select name="select_address_user" id="select_address_user" data-list-place="<%= place %>">
+                  <% @addresses.each do |address| %>
+                    <option value="<%= address.id %>" <% if cookies[:address] == address.id.to_s %>selected<% end %> data-latitude="<%= address.latitude %>" data-longitude="<%= address.longitude %>"><%= address.address %> - <%= address.name %> - <%= address.phone %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <!--End tools -->
+      <% if @places.empty? %>
+        <h2 class="text-center">Không tìm thấy kết quả nào phù hợp</h2>
+      <% else %>
+        <% counter = 0.0 %>
+        <% @places.each do |place| %>
+          <div class="strip_list wow fadeIn" data-wow-delay="<%= counter+=0.1 %>s" id="remove_place_<%= place.id %>">
+            <div class="row">
+              <div class="col-md-9 col-sm-9">
+                <div class="desc">
+                  <div class="thumb_strip">
+                    <%= link_to place_path(id: place.id) do %><img src="/assets/img/quants.jpg" alt=""><% end %>
+                    <% if place.status == 0 %>
+                      <p><strong>Đóng cửa</strong></p>
+                    <% end %>
+                  </div>
+                  <div class="rating" style="color: #333;">
+                    <%= place.rating %> <i class="icon_star voted"></i> (<small><%= t ".reviews", count: place.rates.count(:rating) %></small>)
+                  </div>
+                  <%= link_to place_path(id: place.id) do %><h3><%= place.name %></h3><% end %>
+                  <div class="type">
+                    <%= by_category_name place.category_id %> / <%= by_province_name place.province_id %>
+                  </div>
+                  <div class="location">
+                    <%= place.address %>. <span class="opening"><%= t ".open_at" %><%= place.start_time %> - <%= place.close_time %>.</span><%= t ".average_price" %><%= number_to_currency_format place.average_price %>
+                  </div>
+                  <p>Khoảng cách: <span id="cal_distance_place_<%= place.id %>" data-place-latitude="<%= place.latitude %>" data-place-longitude="<%= place.longitude %>"></span> km</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-3">
+                <div class="go_to">
+                  <div>
+                    <% if place.status == 0 %>
+                      <%= link_to t(".view_menu"), place_path(id: place.id), class: "btn_1 btn_click_distance", data: {confirm: t("javascript.place_offline"), id: place.id} %>
+                    <% else %>
+                      <%= link_to t(".view_menu"), place_path(id: place.id), class: "btn_1 btn_click_distance", data: {id: place.id} %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End row-->
+          </div>
+          <!-- End strip_list-->
+        <% end %>
+      <% end %>
+    </div>
+    <!-- End col-md-9-->
+  </div>
+  <!-- End row -->
+</div>
+<!-- End container -->
+<!-- End Content =============================================== -->
+
+<%= render "shared/search" %>
+
+<%= javascript_include_tag "custom_shipper" %>

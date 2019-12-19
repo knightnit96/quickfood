@@ -1,0 +1,13 @@
+ <!-- Google map modal -->
+<div class="modal fade" id="modal_map" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <input type="text" id="pac-input" placeholder="<%= t('placeholder.find_address') %>">
+      <div id="map2" class="is_map"></div>
+      <button type="button" class="btn btn-submit close-link nomargin"><%= t ".complete" %></button>
+    </div>
+  </div>
+</div>
+<!-- End modal -->
+
+<%= javascript_include_tag "session" %>

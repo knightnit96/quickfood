@@ -1,0 +1,66 @@
+<div class="modal fade" id="modal_edit_menu_item" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_tag update_menu_item_profiles_path(place_id: @place.id), method: :put, id: "form_edit_menu_item" do %>
+        <div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <label>Tên món</label>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= text_field_tag :menu_item_name, "", class: "form-control form-white", autocomplete: "name" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <label>Giá</label>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= number_field_tag :menu_item_price, "", class: "form-control form-white", autocomplete: "price" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <label>Giảm giá</label>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= number_field_tag :menu_item_discount, "", class: "form-control form-white", autocomplete: "discount" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <label>Hình ảnh</label>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <div class="edit-menu-item-pic dropzone">
+                <%= file_field_tag :image %>
+                <div class="dz-default dz-message"><span>Nhấn hoặc thả<br>ảnh tại đây</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= hidden_field_tag "menu_item_id", "", class: "form-control" %>
+        <div class="row">
+          <div class="col-md-4 col-sm-4"></div>
+          <div class="col-md-4 col-sm-4"><button type="submit" class="btn btn-submit nomargin" id="submit_edit_menu_item"><%= t ".save" %></button></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

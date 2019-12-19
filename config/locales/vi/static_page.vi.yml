@@ -1,0 +1,75 @@
+vi:
+  static_pages:
+    home:
+      title: "Trang chủ"
+      deliver_your_office: "Chúng tôi cũng giao hàng đến văn phòng của bạn"
+      over_place: "Chọn từ hơn %{size} địa điểm"
+      view_all_place: "Xem tất cả các địa điểm"
+      how_it_work: "Làm thế nào nó hoạt động"
+      search_by_address: "Tìm kiếm theo địa chỉ"
+      search_by_address_detail: "Tìm tất cả các địa điểm có sẵn trong khu vực của bạn."
+      choose_place: "Chọn một địa điểm"
+      choose_place_detail: "Chúng tôi có rất nhiều thực đơn trực tuyến."
+      pay_by_payment: "Thanh toán tiền mặt"
+      pay_by_payment_detail: "Thật nhanh chóng, dễ dàng và hoàn toàn an toàn."
+      delivery_or_takeaway: "Giao hàng tận nơi"
+      delivery_or_takeaway_detail: "Bạn lười biếng? Bạn đang làm tại nhà?"
+      minute_deliver: "Những phút thường mất để giao hàng!"
+      reviews:
+        zero: "%{count} nhận xét"
+        one: "%{count} nhận xét"
+        other: "%{count} nhận xét"
+      open_at: "Mở cửa lúc "
+      average_price: " Giá trung bình: "
+      choose_most_popular: "Bán chạy nhất"
+    about:
+      title: "Thông tin"
+      about_us: "Về chúng tôi"
+      home: "Trang chủ"
+      some_about_us: "Vài lời về chúng tôi"
+      detail_some_about_us: "Trang Giới thiệu là một trang trên trang web của bạn cho độc giả biết tất cả về bạn.
+        Nó bao gồm một mô tả chi tiết bao gồm tất cả các khía cạnh của doanh nghiệp của bạn và bạn là doanh nhân. Điều này
+        có thể bao gồm các sản phẩm hoặc dịch vụ bạn đang cung cấp, cách bạn trở thành một doanh nghiệp, sứ mệnh của bạn
+        và tầm nhìn, mục tiêu của bạn và có thể một cái gì đó về các mục tiêu trong tương lai của bạn. Trang Giới thiệu của bạn là hoàn hảo của bạn
+        cơ hội để kể một câu chuyện hấp dẫn về doanh nghiệp của bạn."
+      mission: "Nhiệm vụ"
+      detail_mission: "Bắt đầu trang Giới thiệu của bạn bằng cách nói với khách hàng về bản thân bạn. Có gì độc đáo ở bạn
+        các tính năng chính của bạn là gì và nhiệm vụ của bạn là gì? Cố gắng nổi bật bằng cách truyền đạt các giá trị và văn hóa của bạn
+        như một thương hiệu, hoặc những gì mang lại cho công ty của bạn với nhau. Sử dụng khu vực này để trả lời đầy đủ câu hỏi bạn là ai
+        như một thương hiệu, và những gì bạn đại diện. Điều này không có nghĩa là nó phải quá dài, nhưng bạn có thể sử dụng nó
+        không gian để giao tiếp bản thân theo cách bạn cảm thấy thoải mái, với khán giả của mình."
+      history: "Lịch sử"
+      detail_history: "Đưa khách truy cập trên trang web của bạn đến một chuyến đi xuống làn đường bộ nhớ và cung cấp cho họ cái nhìn sâu sắc về
+        lịch sử đằng sau cửa hàng của bạn. Tại đây, bạn có thể chỉ cho họ nơi, cách thức và thời điểm bạn bắt đầu và mọi thứ của bạn
+        kinh doanh đã hoàn thành trên đường đi Đây là cơ hội của bạn để chia sẻ các cột mốc và thành tích có liên quan của bạn
+        liên quan đến doanh nghiệp của bạn một cách hấp dẫn. Bạn thậm chí có thể chọn trình bày lịch sử của mình cho người xem của bạn trong
+        hình thức của dòng thời gian, cho phép bạn hiển thị một lượng lớn thông tin một cách trực quan
+        cách thức. Khách hàng hoặc khách hàng tiềm năng của bạn có thể quan tâm đến việc xem bạn đã tăng trưởng như thế nào trong những năm qua."
+      quality_feauture: "Chất lượng của Quick food"
+      place: "Địa điểm"
+      detail_place: "Có hơn %{place} địa điểm trên toàn quốc trên hệ thống của chúng tôi. Họ đều là những nơi tuyệt vời"
+      food_menu: "Thức ăn"
+      detail_food_menu: "Có hơn %{food_menu} thực đơn trên toàn quốc trên hệ thống của chúng tôi. Chúng đều là những thực đơn thức ăn tuyệt vời"
+      shipper: "Người giao hàng"
+      detail_shipper: "Có hơn %{shipper} chủ hàng trên toàn quốc trên hệ thống của chúng tôi. Họ đều là những chủ hàng tuyệt vời"
+      delivery: "<span>Giao hàng tận nơi</span>"
+      detail_delivery: "Chúng tôi sẽ giao hàng tận nơi cho bạn"
+      cash_payment: "Thanh toán <span>bằng tiền mặt</span>"
+      detail_cash_payment: "Có nhiều cách để thanh toán với các đơn đặt hàng của chúng tôi. Thanh toán bằng tiền mặt là cách phổ biến nhất"
+      card_payment: "Thanh toán <span>thẻ an toàn</span>"
+      detail_card_payment: "Có nhiều cách để thanh toán với các đơn đặt hàng của chúng tôi. Thanh toán bằng thẻ tín dụng là cách nhanh nhất"
+      sologan: '"Khách hàng là ưu tiên số một"'
+      detail_sologan: "Không suy nghĩ vì lợi ích của khách hàng, doanh nghiệp không thể phát triển thịnh vượng. Nếu chúng ta muốn
+        lợi ích, trước tiên chúng ta phải gieo điều tốt cho điều tốt, rồi điều tốt sẽ trả lại cho chúng ta"
+    contact:
+      home: "Trang chủ"
+      title: "Liên hệ"
+      customer_service: "Chăm sóc khách hàng"
+      place_support: "Hỗ trợ địa điểm"
+      address_customer_service: "Tầng 4, Toàn nhà FHome, 16 Lý Thường Kiệt, Hải Châu, Đà Nẵng"
+      work_time: "8h sáng - 6h chiều từ thứ hai đến thứ sáu"
+      address_place_support_service: "Tầng 3, Toàn nhà FHome, 16 Lý Thường Kiệt, Hải Châu, Đà Nẵng"
+    faq:
+      home: "Trang chủ"
+      title: "Câu hỏi thường gặp"
+      faq: "Các câu hỏi thường gặp"

@@ -1,0 +1,28 @@
+vi:
+  shared:
+    modal_login:
+      remember_me: "Lưu mật khẩu"
+      forgot_pass: "Quên mật khẩu?"
+      login: "Đăng nhập"
+      dont_have_account: "Bạn chưa có tài khoản tại Quick Food?"
+      register: "Đăng ký"
+    modal_register:
+      login: "Đăng nhập"
+      have_account: "Bạn đã có tài khoản tại Quick Food?"
+      register: "Đăng ký"
+    modal_map:
+      complete: "Hoàn thành"
+    error_messages:
+      form_error:
+        one: "Biểu mẫu chứa 1 lỗi: "
+        other: "Biểu mẫu chứa %{count} lỗi: "
+    live_chat:
+      delivered: "Đã giao hàng"
+      received: "Đã nhận hàng"
+      order: "Đơn hàng"
+      map: "Bản đồ"
+      cancel: "Hủy đơn"
+    modal_confirm_code:
+      dont_have_code: "Bạn không có mã mở khóa?"
+      logout: "Đăng xuất"
+      confirm: "Xác nhận mã"

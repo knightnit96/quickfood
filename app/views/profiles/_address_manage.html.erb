@@ -1,0 +1,100 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_address_manage" href="#your_address"><%= t ".your_address" %><i class="indicator icon_minus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="your_address" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center"><%= t "table.common_name" %></th>
+            <th class="text-center"><%= t "table.name" %></th>
+            <th class="text-center"><%= t "table.address" %></th>
+            <th class="text-center"><%= t "table.phone" %></th>
+            <th class="text-center"><%= t "table.action" %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @addresses.blank? %>
+            <tr>
+              <td class="text-center" colspan="6"><%= t "table.not_found" %></td>
+            </tr>
+          <% else %>
+            <%= render partial: "table_address", collection: @addresses, as: :address %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @addresses if @addresses.present? %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_address_manage" href="#add_address"><%= t ".add_address" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="add_address" class="panel-collapse collapse">
+    <div class="panel-body">
+      <%= form_for @address, url: { action: "create_address" }, html: {id: "my_address_form"} do |f| %>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :common_name %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :common_name, autocomplete: "common_name", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :name %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :name, autocomplete: "name", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :address %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :address, autocomplete: "address", class: "form-control select_address" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :phone %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :phone, autocomplete: "phone", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <%= hidden_field_tag "longitude_address", "", class: "form-control" %>
+        <%= hidden_field_tag "latitude_address", "", class: "form-control" %>
+        <div class="row">
+          <div class="col-md-4 col-sm-4"></div>
+          <div class="col-md-4 col-sm-4"><button type="submit" class="btn_full_outline"><%= t ".save" %></button></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

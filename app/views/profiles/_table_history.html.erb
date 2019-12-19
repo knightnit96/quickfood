@@ -1,0 +1,23 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="text-center">#</th>
+      <th class="text-center"><%= t "table.data_time" %></th>
+      <th class="text-center"><%= t "table.place" %></th>
+      <th class="text-center"><%= t "table.shipper" %></th>
+      <th class="text-center"><%= t "table.total_price" %></th>
+      <th class="text-center"><%= t "table.status" %></th>
+      <th class="text-center"><%= t "table.detail" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @orders.blank? %>
+      <tr>
+        <td class="text-center" colspan="7"><%= t "table.not_found" %></td>
+      </tr>
+    <% else %>
+      <%= render partial: "table_history_detail", collection: @orders, as: :order %>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @orders, params: {tab: "order_history", nav: nil} if @orders.present? %>

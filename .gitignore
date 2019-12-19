@@ -26,3 +26,17 @@
 /public/packs-test
 yarn-debug.log*
 .yarn-integrity
+/test
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+
+# Ignore application configuration
+/config/application.yml
+/config/database.yml
+/db/schema.rb
+/public/javascripts
+translations.js
+settings.json
+/public/uploads

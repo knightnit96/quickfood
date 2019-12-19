@@ -1,0 +1,50 @@
+<% provide :title, t(".title") %>
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark"><%= t ".user_management" %></h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><%= link_to t(".home"), admin_path %></li>
+            <li class="breadcrumb-item active"><%= t ".title" %></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="content">
+    <div class="card card-primary card-outline">
+      <div class="card-header">
+        <h3 class="card-title">
+          <%= link_to(new_admin_user_path) do %>
+            <button type="button" class="btn btn-block btn-primary"><i class="fas fa-plus"></i> <%= t ".add_user" %></button>
+          <% end %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <table id="datatable-setting" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th class="stt">#</th>
+              <th class="have_orderable"><%= t "table.name" %></th>
+              <th class="have_orderable"><%= t "table.email" %></th>
+              <th class="image"><%= t "table.avatar" %></th>
+              <th class="have_orderable"><%= t "table.gender" %></th>
+              <th class="have_orderable"><%= t "table.role" %></th>
+              <th class="action"><%= t "table.lock_at" %></th>
+              <th class="action"><%= t "table.action" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: "user", collection: @users, as: :user %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<%= javascript_include_tag "admin/custom_admin" %>

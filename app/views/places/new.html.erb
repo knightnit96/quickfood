@@ -1,0 +1,61 @@
+<% provide :title, t(".title") %>
+<!-- SubHeader =============================================== -->
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/assets/img/sub_header.jpg" data-natural-width="1400" data-natural-height="350">
+  <div id="subheader">
+    <div id="sub_content">
+      <h1><%= t ".title" %></h1>
+    </div>
+    <!-- End sub_content -->
+  </div>
+  <!-- End subheader -->
+</section>
+<!-- End section -->
+<!-- End SubHeader ============================================ -->
+<div id="position">
+  <div class="container">
+    <ul>
+      <li><%= link_to t("static_pages.home.title"), root_path %></li>
+      <li><%= link_to t(".title"), new_place_path %></li>
+    </ul>
+    <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> <%= t "search" %></a>
+  </div>
+</div>
+<!-- Position -->
+<div class="container margin_60">
+  <div class="main_title margin_mobile">
+    <h2 class="nomargin_top"><%= t ".pls_submit" %></h2>
+    <p><%= t ".detail_pls_submit" %></p>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <%= render "form" %>
+    </div>
+    <!-- End col  -->
+  </div>
+  <!-- End row  -->
+</div>
+<!-- End container  -->
+<!-- End Content =============================================== -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 nopadding features-intro-img">
+      <div class="features-bg img_2">
+        <div class="features-img">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 nopadding">
+      <div class="features-content">
+        <h3>"Những gì bạn cần"</h3>
+        <ul class="list_ok">
+          <li>Một cửa hàng hoặc quán ăn của bạn mà bạn muốn bán thức ăn trực tuyến và là một địa điểm có ví trí xác thực</li>
+          <li>Điện thoại thông minh - iPhone 4s trở lên hoặc Android 4.3 trở lên.</li>
+          <li>Quyền làm việc tại Việt Nam.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/modal_map" %>
+<%= render "shared/search" %>

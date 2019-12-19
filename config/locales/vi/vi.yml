@@ -1,0 +1,77 @@
+vi:
+  hello: "Chào thế giới"
+  search: "Tìm kiếm"
+  helpers:
+    label:
+      place:
+        name: "Tên"
+        phone: "SĐT"
+        email: "Email"
+        website: "Trang web"
+        category: "Danh mục"
+        province: "Tỉnh thành"
+        detail_direction: "Chỉ đường chi tiết"
+        description: "Mô tả"
+        address: "Địa chỉ"
+        capacity: "Sức chứa"
+        start_time: "Thời gian mở cửa"
+        close_time: "Thời gian đóng cửa"
+        average_price: "Giá trung bình"
+      user:
+        name: "Tên"
+        email: "Email"
+        gender: "Giới tính"
+        current_password: "Mật khẩu"
+        password: "Mật khẩu mới"
+        password_confirmation: "Xác nhận mật khẩu mới"
+        address: "Địa chỉ"
+        phone: "Số điện thoại"
+      address:
+        common_name: "Tên thường gọi"
+        name: "Tên"
+        address: "Địa chỉ"
+        phone: "Số điện thoại"
+      classify_category:
+        name: "Tên"
+        parent_id: "Cha"
+        icon: "Biểu tượng"
+      category:
+        name: "Tên"
+      shipper:
+        province_id: "Tỉnh thành"
+        identity_card: "CMND"
+  views:
+    pagination:
+      first: "«"
+      last: "»"
+      previous: "‹"
+      next: "›"
+      truncate: "…"
+  tooltip:
+    edit: "Sửa"
+    location: "Vị trí"
+    delete: "Xóa"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      long: "%B %d, %Y %H:%M"
+      short: "%Y-%m-%d %H:%M"
+      short_time: "%H:%M"
+  activerecord:
+    attributes:
+      user:
+        name: "Tên"
+        email: "Email"
+        gender: "Giới tính"
+        avatar: "Ảnh đại diện"
+        password: "Mật khẩu"
+        password_confirmation: "Xác nhận mật khẩu"
+        current_password: "Mật khẩu cũ"
+      address:
+        address: "Địa chỉ"
+        phone: "Số điện thoại"

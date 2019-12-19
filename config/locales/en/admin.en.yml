@@ -1,0 +1,85 @@
+en:
+  admin:
+    dashboard:
+      index:
+        title: "Dashboard"
+    categories:
+      index:
+        title: "Category"
+        category_management: "Category management"
+        add_category: "Add category"
+        home: "Home"
+      new:
+        title: "Add category"
+        add: "Add"
+        home: "Home"
+        category_management: "Category management"
+      edit:
+        title: "Edit category"
+        edit: "Edit"
+        home: "Home"
+        category_management: "Category management"
+      form:
+        cancel: "Cancel"
+        reset: "Reset"
+    users:
+      index:
+        title: "User"
+        user_management: "User management"
+        add_category: "Add user"
+        home: "Home"
+      new:
+        title: "Add user"
+        add: "Add"
+        home: "Home"
+        user_management: "User management"
+      edit:
+        title: "Edit user"
+        edit: "Edit"
+        home: "Home"
+        user_management: "User management"
+      form:
+        cancel: "Cancel"
+        reset: "Reset"
+      user:
+        detail_user: "Detail user"
+        email: "Email"
+        gender: "Gender"
+        role: "Role"
+        address: "Address"
+        common_name: "Common name"
+        name: "Recipient's name"
+        phone: "Phone"
+    shippers:
+      index:
+        title: "Shipper"
+        shipper_management: "Shipper management"
+        home: "Home"
+      shipper:
+        detail_shipper: "Detail shipper"
+        email: "Email"
+        gender: "Gender"
+        identity_card: "Identity card"
+        province: "Province"
+    places:
+      index:
+        title: "Place"
+        shipper_management: "Place management"
+        home: "Home"
+      place:
+        detail_place: "Detail place"
+        owner: "Owner"
+        address: "Address"
+        email: "Email"
+        gender: "Gender"
+        province: "Province"
+        category: "Category"
+        phone: "Phone"
+        detail_direction: "Detail direction"
+        website: "Website"
+        direction: "Description"
+        capacity: "Capacity"
+        start_time: "Start time"
+        close_time: "Close time"
+        average_price: "Average price"
+        rating: "Rating"

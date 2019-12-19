@@ -11,6 +11,15 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap.min
  *= require base
+ *= require grey
+ *= require date_time_picker
+ *= require blog
+ *= require admin
+ *= require bootstrap3-wysihtml5.min
+ *= require dropzone
+ *= require sweetalert2/dist/sweetalert2.min
+ *= require ion.rangeSlider
+ *= require ion.rangeSlider.skinFlat
+ *= require jquery.rateyo
 */

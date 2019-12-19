@@ -1,0 +1,23 @@
+en:
+  layouts:
+    footer:
+      payment: "Secure payments with"
+      about: "About"
+      about_us: "About us"
+      faq: "Faq"
+      contact: "Contacts"
+      login: "Login"
+      register: "Register"
+      term_condition: "Terms and conditions"
+      news_letter: "Newsletter"
+      detail_news_letter: "Join our newsletter to keep be informed about offers and news."
+    header:
+      login: "Login"
+      register: "Register"
+      language: "Languages"
+      vietnamese: "Vietnamese"
+      english: "English"
+      register_shipper: "Register shipper"
+      create_place: "Create place"
+      manage_your_account: "Manage your account"
+      logout: "Logout"

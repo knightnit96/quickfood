@@ -1,0 +1,49 @@
+en:
+  places:
+    new:
+      title: "New place"
+      pls_submit: "Please submit the form below"
+      detail_pls_submit: "Your favorite places are not on Quick Food yet? Share with the community now!"
+    form:
+      location: "Location"
+      update_location: "Update location"
+      more_information: "More information"
+      classify_category: "Classification of categories"
+      submit: "Submit"
+    index:
+      title: "Places"
+      all_place: "%{size} results in %{province}"
+      open_at: "Opens at "
+      minimum_price: " Minimum price: "
+      view_menu: "View menu"
+      reviews:
+        zero: "%{count} Review"
+        one: "%{count} Review"
+        other: "%{count} Reviews"
+      average_price: " Average price: "
+    show:
+      view_on_map: "View on map"
+      delivery_charge: "Delivery charge:"
+      detail_delivery_charge: " 3000đ per 1km (free ship less than 5km)"
+      need_help: "Need Help?"
+      detail_need_help: "Monday to Friday 9.00am - 7.30pm"
+      menu: "Menu"
+      reviews:
+        zero: "%{count} Review"
+        one: "%{count} Review"
+        other: "%{count} Reviews"
+      load_more: "Load more"
+      are_you_sure: "Are you sure?"
+      not_have_review: "Not have review!"
+    show_order:
+      view_on_map: "View on map"
+      delivery_charge: "Delivery charge:"
+      detail_delivery_charge: " 3000đ per 1km (free ship less than 5km)"
+      need_help: "Need Help?"
+      detail_need_help: "Monday to Friday 9.00am - 7.30pm"
+      menu: "Menu"
+      are_you_sure: "Are you sure?"
+      reviews:
+        zero: "%{count} Review"
+        one: "%{count} Review"
+        other: "%{count} Reviews"

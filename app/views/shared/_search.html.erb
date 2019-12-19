@@ -1,0 +1,10 @@
+<!-- Search Menu -->
+<div class="search-overlay-menu">
+  <span class="search-overlay-close"><i class="icon_close"></i></span>
+  <%= form_tag(list_path(province: to_slug_province(@province.name)), method: :get, id: "searchform", role: "search") do %>
+    <img src="/assets/img/logo_2x.png">
+    <h3 id="detail-search-form">Đặt Đồ ăn, giao hàng từ 20'... có <%= @place_count %> địa điểm ở <%= @province.name %></h3>
+    <%= search_field_tag :keyword, "", placeholder: t("placeholder.find_place") %>
+  <% end %>
+</div>
+<!-- End Search Menu -->
