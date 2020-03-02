@@ -1,0 +1,293 @@
+<% @address = Address.find_by id: order.address_id %>
+<div class="modal fade" id="modal_detal_order_admin_<%= order.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= t ".detail_user" %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div>
+            <h4>Địa chỉ người nhận</h4>
+            <p>
+              Địa chỉ: <%= @address.address %>
+            </p>
+            <p>
+              Người nhận: <%= @address.name %>
+            </p>
+            <p>
+              SĐT: <%= @address.phone %>
+            </p>
+          </div>
+          <h4>Tóm lược</h4>
+          <table class="table table-bordered">
+            <tbody>
+              <% @product_orders = ProductOrder.by_order(order.id).by_parent nil %>
+              <% @product_orders.each do |po| %>
+                <tr>
+                  <td>
+                    <strong><%= po.quantity %> x </strong> <%= po.food_name %>
+                  </td>
+                  <td>
+                    <strong class="pull-right"><%= number_to_currency_format po.actual_price %></strong>
+                  </td>
+                </tr>
+                <% @product_orders_option = ProductOrder.by_parent po.id %>
+                <% @product_orders_option.each do |poo| %>
+                  <tr>
+                    <td>
+                      <strong> + </strong> <%= poo.food_name %>
+                    </td>
+                    <td>
+                      <strong class="pull-right"><%= number_to_currency_format poo.actual_price %></strong>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <tr>
+                <td>
+                  <strong>Tổng món</strong>
+                </td>
+                <td>
+                  <strong class="pull-right"><%= number_to_currency_format order.total_price+order.fee %></strong>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Phí vận chuyển</strong>
+                </td>
+                <td>
+                  <strong class="pull-right"><%= number_to_currency_format order.fee %></strong>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Lịch trình vận chuyển
+                </td>
+                <td>
+                  <strong class="pull-right"><%= l order.created_at + 20.minutes, format: :short %></strong>
+                </td>
+              </tr>
+              <tr>
+                <td class="total_confirm">
+                  TỔNG
+                </td>
+                <td class="total_confirm">
+                  <span class="pull-right"><%= number_to_currency_format order.total_price+order.fee %></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <h4><a href data-toggle="modal" data-target="#modal_detal_user_<%= order.id %>">Thông tin người đặt hàng <i class="fas fa-info"></i></a></h4>
+          <h4><a href data-toggle="modal" data-target="#modal_detal_place_<%= order.id %>">Thông tin địa điểm <i class="fas fa-info"></i></a></h4>
+          <% if order.shipper_id.present? %>
+            <h4><a href data-toggle="modal" data-target="#modal_detal_shipper_<%= order.id %>">Thông tin người giao hàng <i class="fas fa-info"></i></a></h4>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% shipper = Shipper.find_by id: order.shipper_id %>
+<% if shipper.present? %>
+  <div class="modal fade" id="modal_detal_shipper_<%= order.id %>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><%= t ".detail_shipper" %></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="details_item">
+                  <h4><a href data-toggle="modal" data-target="#modal_detal_user_<%= order.id %>"><%= shipper.user_name %></a>
+                  </h4>
+                  <ul class="list">
+                    <li><span><%= t ".email" %></span> : <%= shipper.user_email %></li>
+                    <% if shipper.user_gender == 1 %>
+                      <li><span><%= t ".gender" %></span> : male</li>
+                    <% elsif shipper.user_gender == 2 %>
+                      <li><span><%= t ".gender" %></span> : female</li>
+                    <% end %>
+                    <li><span><%= t ".province" %></span> : <%= shipper.province_name %></li>
+                    <li><span><%= t ".identity_card" %></span> : <%= shipper.identity_card %></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="details_item">
+                  <%= image_tag shipper.user_avatar.url, class: "img-fluid" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% place = Place.find_by id: order.place_id %>
+<div class="modal fade" id="modal_detal_place_<%= order.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= t ".detail_place" %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="details_item">
+                <h4><%= place.name %></h4>
+                <ul class="list">
+                  <li><span><%= t ".owner" %></span> : <a href data-toggle="modal" data-target="#modal_detal_user_<%= order.id %>"><%= place.user_name %></a></li>
+                  <li><span><%= t ".address" %></span> : <%= place.address %></li>
+                  <li><span><%= t ".category" %></span> : <%= place.category_name %></li>
+                  <li><span><%= t ".province" %></span> : <%= place.province_name %>, <%= Province.find_by(id: place.province_parent_id).name %></li>
+                  <li><span><%= t ".phone" %></span> : <%= place.phone %></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="details_item">
+                <%= image_tag place.user_avatar.url, class: "img-fluid" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="details_item">
+                <ul class="list">
+                  <li><span><%= t ".detail_direction" %></span> : <%= place.detail_direction %></li>
+                  <li><span><%= t ".email" %></span> : <%= place.email %></li>
+                  <li><span><%= t ".website" %></span> : <a href="<%= place.website %>"><%= place.website %></a></li>
+                  <li><span><%= t ".description" %></span> : <%= place.description %></li>
+                  <li><span><%= t ".capacity" %></span> : <%= place.capacity %></li>
+                  <li><span><%= t ".start_time" %></span> : <%= place.start_time %></li>
+                  <li><span><%= t ".close_time" %></span> : <%= place.close_time %></li>
+                  <li><span><%= t ".average_price" %></span> : <%= number_to_currency_format place.average_price %></li>
+                  <li><span><%= t ".rating" %></span> : <%= place.rating %> <i class="fas fa-star" style="color: yellow;"></i></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal_detal_user_<%= order.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= t ".detail_user" %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="details_item">
+                <h4><%= order.user_name %></h4>
+                <ul class="list">
+                  <li><span><%= t ".email" %></span> : <%= order.user_email %></li>
+                  <% if order.user_gender == 1 %>
+                    <li><span><%= t ".gender" %></span> : male</li>
+                  <% elsif order.user_gender == 2 %>
+                    <li><span><%= t ".gender" %></span> : female</li>
+                  <% end %>
+                  <li><span><%= t ".role" %></span> : <%= order.user_role %></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="details_item">
+                <%= image_tag order.user_avatar.url, class: "img-fluid" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <%= t ".address" %>
+              <ul class="list">
+                <% list_address(order.user_id).each do |address| %>
+                  <li><%= address.address %>
+                    <ul class="list">
+                      <li><span><%= t ".common_name" %></span> : <%= address.common_name %></li>
+                      <li><span><%= t ".name" %></span> : <%= address.name %></li>
+                      <li><span><%= t ".phone" %></span> : <%= address.phone %></li>
+                    </ul>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modal_detal_chat_admin_<%= order.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Chat - Đơn hàng #<%= order.id %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="live-chat" class="custom_live_chat_modal">
+          <div class="chat">
+            <div class="chat-history">
+              <% @messages = Message.by_order order.id %>
+              <% @messages.each do |message| %>
+                <% user = User.find_by id: message.user_id %>
+                <div class="chat-message clearfix">
+                  <% if message.user_id.present? %>
+                    <%= image_tag user.avatar_url, width: "32", height: "32" %>
+                  <% end %>
+                  <div class="chat-message-content clearfix">
+                    <span class="chat-time"><%= l message.created_at, format: :short %></span>
+                    <h5><strong>
+                      <% if message.user_id.present? %>
+                        <% if message.is_shipper  == false %>
+                          <%= user.name %>
+                        <% else %>
+                          [Shipper] <%= user.name %>
+                        <% end %>
+                      <% else %>
+                        HỆ THỐNG
+                      <% end %>
+                    </strong></h5>
+                    <p><%= message.message %></p>
+                  </div>
+                </div>
+                <hr>
+              <% end %>
+            </div>
+            <!-- end chat-history -->
+          </div>
+          <!-- end chat -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

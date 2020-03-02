@@ -1,0 +1,23 @@
+<tr>
+  <td><%= load_page classify_category_counter %></td>
+  <td><%= classify_category.name %></td>
+  <td>
+    <% if classify_category.icon.present? && classify_category.icon != "0" && classify_category.icon != "1" %>
+      <i class="<%= classify_category.icon %>"></i>
+    <% end %>
+  </td>
+  <td>
+    <% if classify_category.parent_id.present? %>
+      <%= ClassifyCategory.find_by(id: classify_category.parent_id).name %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to(edit_admin_classify_category_path(classify_category)) do %>
+      <span class="fas fa-edit"></span>
+    <% end %>
+    &nbsp;&nbsp;&nbsp;
+    <%= link_to(admin_classify_category_path(classify_category), method: :delete, data: { confirm: t("javascript.are_you_sure") }) do %>
+      <span class="fas fa-trash-alt"></span>
+    <% end %>
+  </td>
+</tr>

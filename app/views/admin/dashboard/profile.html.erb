@@ -1,0 +1,50 @@
+<% provide :title, t(".title") %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Hồ sơ</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="card card-primary card-outline">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6" style="text-align: center;">
+            <% if current_user&.avatar.blank? %>
+              <img src="/assets/img/default-avatar.jpg" class="img-fluid img-circle" width="220px">
+            <% else %>
+              <%= image_tag current_user.avatar_url, class: "img-fluid img-circle", width: "220px" %>
+            <% end %>
+          </div>
+          <div class="col-sm-1">
+            <h4 style="margin-top: 30px">Họ và tên</h4>
+            <h4>Email</h4>
+            <h4>Giới tính</h4>
+            <h4>Vai trò</h4>
+          </div>
+          <div class="col-sm-5">
+            <h4 style="margin-top: 30px">: <strong><%= current_user.name %></strong></h4>
+            <h4>: <strong><%= current_user.email %></strong></h4>
+            <h4>:
+              <% if current_user.gender == 1 %>
+                <strong>nam</strong>
+              <% elsif current_user.gender == 2 %>
+                <strong>nữ</strong>
+              <% end %>
+            </h4>
+            <h4>: <strong><%= current_user.role %></strong></h4>
+            <%= link_to edit_admin_user_path(current_user), class: "btn btn-default btn-flat" do %>
+              <i class="nav-icon fas fa-edit"></i> Sửa thông tin
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

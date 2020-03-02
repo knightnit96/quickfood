@@ -8,15 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: quickfood_development
-
-staging:
-  <<: *default
   database: <%= ENV["DATABASE_NAME"] %>
 
 test:
   <<: *default
-  database: quickfood_test
+  database: <%= ENV["DATABASE_NAME"] %>
 
 production:
   <<: *default

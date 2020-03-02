@@ -1,0 +1,110 @@
+<tr>
+  <td><%= load_page address_counter %></td>
+  <td><%= address.common_name %></td>
+  <td><%= address.name %></td>
+  <td><%= address.address %></td>
+  <td><%= address.phone %></td>
+  <td>
+    <a href data-toggle="modal" data-target="#modal_map_address" data-latitude="<%= address.latitude %>" data-longitude="<%= address.longitude %>" class="open_map_address">
+      <i class="tooltip-1 icon-location" data-placement="top" title="" data-original-title="<%= t("tooltip.location") %>"></i>
+    </a>
+    <a href data-toggle="modal" data-target="#modal_edit_address_<%= address.id %>">
+      <i class="tooltip-1 icon-edit" data-placement="top" title="" data-original-title="<%= t("tooltip.edit") %>"></i>
+    </a>
+    <%= link_to delete_address_profiles_path(address_id: address.id), data: {confirm: t("javascript.are_you_sure"), method: :delete} do %>
+      <i class="tooltip-1 icon-trash" data-placement="top" title="" data-original-title="<%= t("tooltip.delete") %>"></i>
+    <% end %>
+  </td>
+</tr>
+<div class="modal fade" id="modal_edit_address_<%= address.id %>" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_for address, method: :put, url: { action: "update_address" } do |f| %>
+        <div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :common_name %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :common_name, autocomplete: "common_name", class: "form-control form-white" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :name %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :name, autocomplete: "name", class: "form-control form-white" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :address %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :address, autocomplete: "address", class: "form-control form-white select_address_edit", data: {id: address.id} %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group text-right">
+              <%= f.label :phone %>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7">
+            <div class="form-group">
+              <%= f.text_field :phone, autocomplete: "phone", class: "form-control form-white" %>
+            </div>
+          </div>
+        </div>
+        <%= hidden_field_tag "longitude_address_edit_"+address.id.to_s, address.longitude, class: "form-control" %>
+        <%= hidden_field_tag "latitude_address_edit_"+address.id.to_s, address.latitude, class: "form-control" %>
+        <%= hidden_field_tag "address_id", address.id, class: "form-control" %>
+        <div class="row">
+          <div class="col-md-4 col-sm-4"></div>
+          <div class="col-md-4 col-sm-4"><button type="submit" class="btn btn-submit nomargin"><%= t ".save" %></button></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", initMap3);
+
+  function initMap3() {
+    var lat = 16.0749477;
+    var lng = 108.22590129999999;
+    var myCoords = new google.maps.LatLng(lat, lng);
+    var mapOptions = {
+    center: myCoords,
+    zoom: 16
+    };
+    map = new google.maps.Map(document.getElementById('map_address'), mapOptions);
+    marker = new google.maps.Marker({
+      position: myCoords,
+      animation: google.maps.Animation.DROP,
+      map: map,
+    });
+  }
+  $('.open_map_address').on('click', function () {
+    var address_lat = $(this).attr('data-latitude');
+    var address_lng = $(this).attr('data-longitude');
+    var address_myCoords = new google.maps.LatLng(address_lat, address_lng);
+    marker.setPosition(address_myCoords);
+    map.setCenter(marker.getPosition());
+  });
+</script>

@@ -1,0 +1,22 @@
+<!-- Confirm modal -->
+<div class="modal fade" id="confirm_unlock_code" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content modal-popup">
+      <%= form_for(confirm_unlock_profiles_path, method: :post, html: {class: "popup-form", id: "my_form_confirm", format: :json}) do |f| %>
+        <div class="login_icon"><img src="/assets/img/logo_2x.png"></div>
+        <h4>Vui lòng nhập mã mở khóa tài khoản!</h4>
+        <div class="error_confirm"></div>
+        <%= f.text_field "Mã mở khóa", autofocus: true, autocomplete: "code",
+            class: "form-control form-white", placeholder: :code, id: "confirm_code" %>
+        <button type="button" class="btn btn-submit nomargin ajax-confirm-btn"><%= t ".confirm" %></button>
+        <div class="text-center margin_30">
+          <%= t ".dont_have_code" %>
+          <%= link_to t(".logout"), destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End modal -->
+
+<%= javascript_include_tag "session" %>

@@ -1,0 +1,13 @@
+en:
+  javascript:
+    are_you_sure: "Are you sure?"
+    are_you_sure_confirm: "Confirm. Are you sure?"
+    are_you_sure_cancel: "Cancel. Are you sure?"
+    are_you_sure_confirm_order: "Receive purchase order. Are you sure?"
+    are_you_sure_cancel_order: "Cancel order. Are you sure?"
+    change_avatar: "Avatar will be changed!"
+    success:
+      change_avatar: "Update avatar successfully"
+    error:
+      change_avatar: "Update avatar failed"
+    place_offline: "The place is closed, orders will be confirmed when it opens. Still continue?"

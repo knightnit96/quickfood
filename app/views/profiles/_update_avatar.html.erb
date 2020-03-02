@@ -1,0 +1,96 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_update_avatar" href="#your_picture"><%= t ".your_picture" %><i class="indicator icon_minus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="your_picture" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <div class="row zone_edit_avatar">
+        <div class="col-md-3 col-sm-3" style="height: 160px; margin-bottom: 10px">
+          <%= form_tag update_menu_item_profiles_path(), method: :put, id: "form_edit_avatar" do %>
+            <div class="edit-avatar-user dropzone" style="min-height: 162px !important">
+              <%= file_field_tag :avatar %>
+              <div class="dz-default dz-message"><span>Nhấn hoặc thả<br>ảnh tại đây</span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <% if current_user.old_avatar.present? %>
+          <% current_user.old_avatar.split(";").each do |avatar| %>
+            <% if avatar != current_user.avatar.file.filename %>
+              <div class="col-md-3 col-sm-3" style="margin-bottom: 10px">
+                <div class="item-picture-available">
+                  <%= link_to "javascript:void(0)", class: "event-update_avatar" do %>
+                    <img src="/<%= current_user.avatar.store_dir %>/<%= avatar %>" class="img-picture-available">
+                    <div class="ovrly"></div>
+                    <div class="buttons">
+                      <div class="icon-ok"></div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_update_avatar" href="#picture_available"><%= t ".picture_available" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="picture_available" class="panel-collapse collapse">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3 col-sm-3">
+          <div class="item-picture-available">
+            <%= link_to "javascript:void(0)", class: "event-update_avatar" do %>
+              <img src="/assets/img/default-avatar.jpg" class="img-picture-available">
+              <div class="ovrly"></div>
+              <div class="buttons">
+                <div class="icon-ok"></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <div class="item-picture-available">
+            <%= link_to "javascript:void(0)", class: "event-update_avatar" do %>
+              <img src="/assets/img/thumb_restaurant_2.jpg" class="img-picture-available">
+              <div class="ovrly"></div>
+              <div class="buttons">
+                <div class="icon-ok"></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <div class="item-picture-available">
+            <%= link_to "javascript:void(0)", class: "event-update_avatar" do %>
+              <img src="/assets/img/thumb_restaurant.jpg" class="img-picture-available">
+              <div class="ovrly"></div>
+              <div class="buttons">
+                <div class="icon-ok"></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <div class="item-picture-available">
+            <%= link_to "javascript:void(0)", class: "event-update_avatar" do %>
+              <img src="/assets/img/thumb_restaurant_3.jpg" class="img-picture-available">
+              <div class="ovrly"></div>
+              <div class="buttons">
+                <div class="icon-ok"></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

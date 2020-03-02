@@ -1,0 +1,12 @@
+time_zone: "Asia/Ho_Chi_Minh"
+user:
+  name:
+    max_length: 150
+  email:
+    max_length: 255
+controller:
+  namespace_for_admin: "Admin"
+category:
+  max_length: 50
+  min_length: 5
+accept_image: "image/jpeg,image/gif,image/png"

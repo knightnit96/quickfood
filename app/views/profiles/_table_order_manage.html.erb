@@ -1,0 +1,45 @@
+<tr>
+  <td><%= load_page order_counter %></td>
+  <td>
+    <%= l order.created_at, format: :short %>
+  </td>
+  <td>
+    <% @product_orders_parent = ProductOrder.by_order(order.id).by_parent nil %>
+    <% @product_orders = ProductOrder.by_order(order.id).child_only %>
+    <% @product_orders_parent.each do |pop| %>
+      <%= pop.quantity %>x <%= pop.food_name %>(
+      <% i = 0 %>
+      <% @product_orders.each do |po| %>
+        <% if po.parent_id == pop.id %>
+          <% if i == 0 %>
+            <%= po.food_name %>
+          <% else %>
+            <%= ", "+po.food_name %>
+          <% end %>
+          <% i += 1 %>
+        <% end %>
+      <% end %>)<br/>
+    <% end %>
+  </td>
+  <td>
+    <%= number_to_currency_format order.total_price+order.fee %><br/>
+    <%= load_payment(order.payment) %>
+  </td>
+  <td>
+    <a class="btn" style="background: #85c99d; width:100%;"><%= load_status(order.status) %></a><br/>
+  </td>
+  <td class="text-center td_confirm_order">
+    <% if order.status == 0 %>
+      <a data-title="<%= t("javascript.are_you_sure_confirm_order") %>" href="#" rel="nofollow" class="select_confirm_order" data-id="<%= order.id %>" data-value="1">
+        <span class="icon-ok" style="font-size: 25px"></span>
+      </a>
+      <a data-title="<%= t("javascript.are_you_sure_cancel_order") %>" href="#" rel="nofollow" class="select_confirm_order" data-id="<%= order.id %>" data-value="5">
+        <span class="icon-cancel" style="font-size: 25px"></span>
+      </a>
+    <% elsif order.status == 5 %>
+      <span class="icon-cancel" style="font-size: 25px"></span>
+    <% else %>
+      <span class="icon-ok" style="font-size: 25px"></span>
+    <% end %>
+  </td>
+</tr>

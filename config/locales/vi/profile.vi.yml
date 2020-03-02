@@ -1,0 +1,50 @@
+vi:
+  profiles:
+    index:
+      title: "Hồ sơ"
+      manage_profile: "Quản lý hồ sơ"
+      personal: "Cá nhân"
+      basic_info: "Thông tin cơ bản"
+      change_password: "Đổi mật khẩu"
+      update_avatar: "Cập nhật ảnh đại diện"
+      logout: "Đăng xuất"
+      address_manage: "Quản lý địa chỉ"
+      order_history: "Lịch sử đơn hàng"
+      manage_place: "Quản lý địa điểm"
+      manage_shipper: "Quản lý thông tin giao hàng"
+      are_you_sure: "Bạn có chắc không?"
+    form_basic_info:
+      save: "Lưu"
+      male: "Nam"
+      female: "Nữ"
+    form_change_password:
+      save: "Lưu"
+    table_address:
+      save: "Lưu"
+    update_avatar:
+      your_picture: "Ảnh của bạn"
+      picture_available: "Hình ảnh có sẵn"
+    address_manage:
+      add_address: "Thêm địa chỉ"
+      your_address: "Địa chỉ của bạn"
+      save: "Lưu"
+    manage_place:
+      order_manage: "Quản lý đơn hàng"
+      place_info: "Thông tin địa điểm"
+      place_menu: "Thực đơn địa điểm"
+      place_menu_add: "Thực đơn địa điểm - Thêm danh mục thức ăn"
+      place_food_add: "Thực đơn địa điểm - Thêm mục thức ăn"
+      place_food_option: "Thực đơn địa điểm - Thêm mục tùy chọn thức ăn"
+      save: "Lưu"
+      are_you_sure: "Bạn có chắc không?"
+    manage_shipper:
+      save: "Lưu"
+      edit_shipper: "Chỉnh sửa thông tin người giao hàng"
+      delivery_history: "Lịch sử giao hàng"
+      location: "Vị trí"
+    modal_edit_menu_category:
+      save: "Lưu"
+    modal_edit_menu_item:
+      save: "Lưu"
+    modal_edit_menu_option:
+      save: "Lưu"

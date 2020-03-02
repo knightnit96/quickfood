@@ -1,0 +1,13 @@
+<tr>
+  <td><%= load_page category_counter %></td>
+  <td><%= category.name %></td>
+  <td>
+    <%= link_to(edit_admin_category_path(category)) do %>
+      <span class="fas fa-edit"></span>
+    <% end %>
+    &nbsp;&nbsp;&nbsp;
+    <%= link_to(admin_category_path(category), method: :delete, data: { confirm: t("javascript.are_you_sure") }) do %>
+      <span class="fas fa-trash-alt"></span>
+    <% end %>
+  </td>
+</tr>

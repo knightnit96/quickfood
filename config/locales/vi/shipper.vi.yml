@@ -1,0 +1,8 @@
+vi:
+  shippers:
+    new:
+      title: "Đăng ký làm người giao hàng"
+      pls_submit: "Vui lòng gửi mẫu dưới đây"
+      detail_pls_submit: "Nếu bạn rảnh và có xe máy, hãy tham gia nhóm đối tác tài xế của Quickfood, thu nhập hấp dẫn!"
+    form:
+      submit: "Gửi đi"

@@ -1,0 +1,8 @@
+en:
+  shippers:
+    new:
+      title: "Register as partner"
+      pls_submit: "Please submit the form below"
+      detail_pls_submit: "If you are free and have a motorbike, join Quickfood's driver partner team, attractive income!"
+    form:
+      submit: "Submit"

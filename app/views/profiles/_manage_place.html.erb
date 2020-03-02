@@ -1,0 +1,265 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_manage_place" href="#order_manage"><%= t ".order_manage" %><i class="indicator icon_minus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="order_manage" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center"><%= t "table.data_time" %></th>
+            <th class="text-center"><%= t "table.detal_order" %></th>
+            <th class="text-center"><%= t "table.total_price" %></th>
+            <th class="text-center"><%= t "table.status" %></th>
+            <th class="text-center" width="100px"><%= t "table.action" %></th>
+          </tr>
+        </thead>
+        <tbody>
+            <%= render partial: "table_order_manage", collection: @orders_in_place, as: :order %>
+        </tbody>
+      </table>
+      <%= paginate @orders_in_place, params: {tab: "manage_place", nav: "manage_place_"+@place.id.to_s} if @orders_in_place.present? %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_manage_place" href="#place_menu"><%= t ".place_menu" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="place_menu" class="panel-collapse collapse">
+    <div class="panel-body">
+      <% @menu_cat.each do |menu_cat| %>
+        <h3 class="nomargin_top">
+          <%= menu_cat.name %>
+          <%= link_to(delete_menu_category_profiles_path(menu_category_id: menu_cat.id, place_id: @place.id), method: :delete, class: "pull-right", data: { confirm: t(".are_you_sure") }) do %>
+            <i class="icon-trash"></i>
+          <% end %>
+          <a href data-toggle="modal" data-target="#modal_edit_menu_category" data-id="<%= menu_cat.id %>" data-name="<%= menu_cat.name %>" class="pull-right open_modal_menu_category">
+            <i class="icon-pencil"></i>
+          </a>
+        </h3>
+        <% if list_menu_item(menu_cat.id).present? %>
+          <table class="table table-striped cart-list">
+            <thead>
+              <tr>
+                <th>Thức ăn</th>
+                <th>Giá</th>
+                <th>Tùy chọn</th>
+                <th width="15%">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% list_menu_item(menu_cat.id).each do |menu_item| %>
+                <tr>
+                  <td>
+                    <figure class="thumb_menu_list">
+                      <% if menu_item.image.present? %>
+                        <% photo_url = menu_item.image_url %>
+                      <% else %>
+                        <% photo_url = "/assets/img/image-not-available.jpg" %>
+                      <% end %>
+                      <%= image_tag photo_url %>
+                    </figure>
+                    <h5><%= menu_item.name %></h5>
+                  </td>
+                  <td>
+                    <% if menu_item.discount.present? %>
+                      <strong><del><%= number_to_currency_format menu_item.price %></del></strong><br />
+                      <strong><%= number_to_currency_format menu_item.discount %></strong>
+                    <% else %>
+                      <strong><%= number_to_currency_format menu_item.price %></strong>
+                    <% end %>
+                  </td>
+                  <td class="options">
+                    <div class="dropdown dropdown-options">
+                      <a href class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
+                      <div class="dropdown-menu custom-width-dropdown" data-method="edit-delete">
+                        <h5>Chọn một tùy chọn</h5>
+                        <% if list_menu_option_radio(menu_item.id).blank? %>
+                          There is no radio option menu
+                        <% end %>
+                        <% list_menu_option_radio(menu_item.id).each do |mo_radio| %>
+                          <label>
+                            <input type="radio" value="option1" name="options_1"><%= mo_radio.name %>
+                            <span>
+                              + <%= number_to_currency_format mo_radio.price %>
+                              <%= link_to(delete_menu_option_profiles_path(menu_option_id: mo_radio.id, place_id: @place.id), method: :delete, class: "pull-right", data: { confirm: t(".are_you_sure") }) do %>
+                                <i class="icon-trash option-size-icon"></i>
+                              <% end %>
+                              <a href data-toggle="modal" data-target="#modal_edit_menu_option" data-id="<%= mo_radio.id %>" data-name="<%= mo_radio.name %>" data-price="<%= mo_radio.price %>" class="pull-right open_modal_menu_option">
+                                <i class="icon-pencil option-size-icon"></i>
+                              </a>
+                            </span>
+                          </label>
+                        <% end %>
+                        <h5>Thêm thành phần</h5>
+                        <% if list_menu_option_checkbox(menu_item.id).blank? %>
+                          There is no checkbox option menu
+                        <% end %>
+                        <% list_menu_option_checkbox(menu_item.id).each do |mo_checkbox| %>
+                          <label>
+                            <input type="checkbox" value=""><%= mo_checkbox.name %>
+                            <span>
+                              + <%= number_to_currency_format mo_checkbox.price %>
+                              <%= link_to(delete_menu_option_profiles_path(menu_option_id: mo_checkbox.id, place_id: @place.id), method: :delete, class: "pull-right", data: { confirm: t(".are_you_sure") }) do %>
+                                <i class="icon-trash option-size-icon"></i>
+                              <% end %>
+                              <a href data-toggle="modal" data-target="#modal_edit_menu_option" data-id="<%= mo_checkbox.id %>" data-name="<%= mo_checkbox.name %>" data-price="<%= mo_checkbox.price %>" class="pull-right open_modal_menu_option">
+                                <i class="icon-pencil option-size-icon"></i>
+                              </a>
+                            </span>
+                          </label>
+                        <% end %>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="action_css">
+                    <a href data-toggle="modal" data-target="#modal_edit_menu_item" data-id="<%= menu_item.id %>" data-name="<%= menu_item.name %>" data-price="<%= menu_item.price %>" data-discount="<%= menu_item.discount %>" data-image="<%= menu_item.image_url %>" data-name-image="<%= menu_item.image %>" class="open_modal_menu_item">
+                      <i class="icon-pencil"></i>
+                    </a>
+                    <%= link_to(delete_menu_item_profiles_path(menu_item_id: menu_item.id, place_id: @place.id), method: :delete, data: { confirm: t(".are_you_sure") }) do %>
+                      <i class="icon-trash"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+        <hr>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_manage_place" href="#place_info"><%= t ".place_info" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="place_info" class="panel-collapse collapse">
+    <div class="panel-body">
+      <%= render "places/form" %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_manage_place" href="#place_menu_add"><%= t ".place_menu_add" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="place_menu_add" class="panel-collapse collapse">
+    <div class="panel-body">
+      <%= form_tag create_menu_category_profiles_path, method: :post do %>
+        <label>Danh mục thức ăn</label>
+        <%= text_field_tag :name, "", class: "form-control", autocomplete: "name", placeholder: "VD. Khai vị, Món chính,..." %>
+        <%= hidden_field_tag "place_id", @place.id, class: "form-control" %>
+        <hr class="styled">
+        <%= submit_tag "Lưu", class: "btn_1" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_manage_place" href="#place_food_add"><%= t ".place_food_add" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="place_food_add" class="panel-collapse collapse">
+    <div class="panel-body">
+      <%= form_tag create_menu_item_profiles_path, method: :post, id: "form_add_menu_item" do %>
+        <div class="form-group">
+          <label>Danh mục thức ăn</label>
+          <%= select_tag "food_parent", options_from_collection_for_select(@menu_cat, "id", "name"), class: "form-control", include_blank: "Chọn danh mục" %>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="menu-item-pic dropzone">
+              <%= file_field_tag :image %>
+              <div class="dz-default dz-message"><span>Nhấn hoặc thả<br>ảnh tại đây</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="form-group">
+              <label>Tên</label>
+              <%= text_field_tag :name, "", class: "form-control", autocomplete: "name", placeholder: "VD. Cơm, mỳ, bún,..." %>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Giá</label>
+                  <%= number_field_tag :price, "", class: "form-control", autocomplete: "price", placeholder: "VD. 9000đ" %>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Giảm giá</label>
+                  <%= number_field_tag :discount, "", class: "form-control", autocomplete: "discount", placeholder: "VD. 5000đ" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= hidden_field_tag "place_id", @place.id, class: "form-control" %>
+        <hr class="styled">
+        <%= submit_tag "Lưu", class: "btn_1", id: "submit_add_menu_item" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#profile_manage_place" href="#place_food_option"><%= t ".place_food_option" %><i class="indicator icon_plus_alt2 pull-right"></i></a>
+    </h4>
+  </div>
+  <div id="place_food_option" class="panel-collapse collapse">
+    <div class="panel-body">
+      <%= form_tag create_menu_option_profiles_path, method: :post do %>
+        <div class="form-group">
+          <label>Món</label>
+          <%= select_tag "food_item_parent", options_from_collection_for_select(@menu_food, "id", "name"), class: "form-control select-box-food-option", include_blank: "Chọn món" %>
+          <div class="tags" id="tags_food_option"></div>
+        </div>
+        <div id="input_food_option">
+          <div class="form-group" id="number_1">
+            <div class="row">
+              <div class="col-sm-3">
+                <input name="price_1" type="number" class="form-control" placeholder="VD. 5000đ">
+              </div>
+              <div class="col-sm-5">
+                <input name="name_1" type="text" class="form-control" placeholder="VD. Thêm đường, thêm sữa,...">
+              </div>
+              <div class="col-sm-4 radio-input">
+                <label><input type="radio" name="option_item_1" checked class="icheck" value="1">Checkbox</label>
+                <label class="margin_left"><input type="radio" name="option_item_1" class="icheck" value="2">Radio</label>
+                <a href="javascript:void(0)" class="nomargin remove_input_food_option" data-number="1"><i class="icon-trash"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= hidden_field_tag "list_foods", "", class: "form-control" %>
+        <%= hidden_field_tag "place_id", @place.id, class: "form-control" %>
+        <%= hidden_field_tag "number", 1, class: "form-control" %>
+        <hr class="styled">
+        <%= submit_tag "Lưu", class: "btn_1", id: "submit_add_menu_item" %>
+        <%= button_tag type: "button", class: "btn_1", id: "add_input_menu_option" do %>
+          <i class="icon-plus"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render "modal_edit_menu_category" %>
+<%= render "modal_edit_menu_item" %>
+<%= render "modal_edit_menu_option" %>
+<%= render "shared/modal_map" %>

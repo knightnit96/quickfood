@@ -1,0 +1,42 @@
+<%= form_for [:admin, @classify_category] do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Nhập tên" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :parent_id %>
+          <%= f.select :parent_id, options_from_collection_for_select(@cc_parents, "id", "name"), {prompt: "Không"}, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :icon %>
+          <select id="classify_category_parent_id" class="form-control selectpicker" data-live-search="true">
+            <option value="">Không</option>
+            <% list_icon.each do |icon| %>
+              <option value="<%= icon %>" data-icon="<%= icon %>"><%= icon %></option>
+            <% end %>
+          </select>
+          <%= hidden_field_tag "icon_classify_category", "", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <input type="reset" value="<%= t(".reset") %>" class="btn btn-info">
+    <%= link_to admin_classify_categories_path, class: "btn btn-default" do %>
+      <%= t(".cancel") %>
+    <% end %>
+  </div>
+<% end %>

@@ -8,11 +8,12 @@ Bundler.require(*Rails.groups)
 
 module Quickfood
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
+    config.time_zone = Settings.time_zone
     config.load_defaults 5.1
-
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
+    config.i18n.available_locales = [:en, :vi]
+    config.i18n.default_locale = :vi
+    config.middleware.use I18n::JS::Middleware
+    config.exceptions_app = self.routes
   end
 end

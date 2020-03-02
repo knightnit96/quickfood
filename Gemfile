@@ -5,40 +5,37 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 5.1.7"
-gem "rubocop", "~> 0.54.0", require: false
-# Use sqlite3 as the database for Active Record
-gem "sqlite3"
-# Use Puma as the app server
-gem "puma", "~> 3.7"
-# Use SCSS for stylesheets
-gem "sass-rails", "~> 5.0"
-# Use Uglifier as compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker"
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use CoffeeScript for .coffee assets and views
+gem "activemerchant"
+gem "bootstrap-select-rails"
+gem "cancancan"
+gem "carrierwave", "1.2.2"
 gem "coffee-rails", "~> 4.2"
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem "turbolinks", "~> 5"
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem "config"
+gem "devise"
+gem "faker"
+gem "figaro"
+gem "geocoder"
+gem "gmaps4rails"
+gem "i18n-js"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem "kaminari"
+gem "mini_magick", "~> 4.8"
+gem "money"
+gem "mysql2"
+gem "public_activity"
+gem "puma", "~> 3.7"
+gem "rails", "~> 5.1.7"
+gem "rails-i18n"
+gem "redis", "~> 4.0"
+gem "rubocop", "~> 0.54.0", require: false
+gem "rufus-scheduler"
+gem "sass-rails", "~> 5.0"
+gem "search_cop"
+gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
   gem "byebug", platforms: %i(mri mingw x64_mingw)
-  # Adds support for Capybara system testing and selenium driver
   gem "capybara", ">= 2.15"
   gem "selenium-webdriver"
 end
@@ -50,5 +47,4 @@ group :development do
   gem "web-console", ">= 3.3.0"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i(mingw mswin x64_mingw jruby)
